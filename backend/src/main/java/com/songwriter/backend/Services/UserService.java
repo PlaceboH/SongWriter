@@ -23,7 +23,7 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User createUser(SignupRequest userSignupRequest){
+    public void createUser(SignupRequest userSignupRequest){
         User user = new User();
         user.setEmail(userSignupRequest.getEmail());
         user.setName(userSignupRequest.getFirstname());
@@ -33,7 +33,7 @@ public class UserService {
         user.getRoles().add(ERole.ROLE_USER);
         try {
             LOG.info("Saving user {}", userSignupRequest.getUsername());
-            return userRepository.save(user);
+            userRepository.save(user);
         }catch (Exception ex) {
             LOG.error("Error during registration, {}", ex.getMessage());
             throw new UserExistException("User " + user.getUsername() + " already exist. Please check credentials" );

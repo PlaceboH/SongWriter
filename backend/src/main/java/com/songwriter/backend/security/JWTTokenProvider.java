@@ -32,7 +32,7 @@ public class JWTTokenProvider {
                 .addClaims(claimsMap)
                 .setIssuedAt(dateNow)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.ES512, Constants.SECRET)
+                .signWith(SignatureAlgorithm.HS512, Constants.SECRET)
                 .compact();
     }
 
