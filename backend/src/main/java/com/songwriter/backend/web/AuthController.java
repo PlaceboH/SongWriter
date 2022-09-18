@@ -1,6 +1,6 @@
 package com.songwriter.backend.web;
 
-import com.songwriter.backend.Services.UserService;
+import com.songwriter.backend.services.UserService;
 import com.songwriter.backend.payload.request.LoginRequest;
 import com.songwriter.backend.payload.request.SignupRequest;
 import com.songwriter.backend.payload.response.JWTTokenSuccessResponse;
