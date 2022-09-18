@@ -1,6 +1,6 @@
 package com.songwriter.backend.security;
 
-import com.songwriter.backend.Services.CustomUserDetailsService;
+import com.songwriter.backend.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -22,5 +22,4 @@ public class ImageModel {
     private Long postId;
     @JsonIgnore
     private Long musicWorkId;
-
 }

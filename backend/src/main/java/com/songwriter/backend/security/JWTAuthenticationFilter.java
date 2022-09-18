@@ -1,6 +1,6 @@
 package com.songwriter.backend.security;
 
-import com.songwriter.backend.Services.CustomUserDetailsService;
+import com.songwriter.backend.services.CustomUserDetailsService;
 import com.songwriter.backend.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

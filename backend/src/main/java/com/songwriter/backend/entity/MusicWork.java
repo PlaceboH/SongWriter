@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 @Data
 @Entity
 public class MusicWork {
@@ -26,12 +27,12 @@ public class MusicWork {
     @Column(columnDefinition = "LONGBLOB", unique = false)
     private byte[] notes;
     private String caption;
-
+    private Integer likes;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Mark> marks = new HashSet<>();
- 
+
     @Column
     @ElementCollection(targetClass = String.class)
     private Set<String> likedUsers = new HashSet<>();
@@ -42,7 +43,7 @@ public class MusicWork {
     private LocalDateTime creationDate;
 
     @PrePersist
-    protected void onCreate(){
+    protected void onCreate() {
         this.creationDate = LocalDateTime.now();
     }
 }

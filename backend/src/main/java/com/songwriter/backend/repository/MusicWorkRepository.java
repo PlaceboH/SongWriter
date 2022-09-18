@@ -14,5 +14,6 @@ public interface MusicWorkRepository extends JpaRepository<MusicWork, Long> {
     List<MusicWork> findAllByUserOrderByCreationDateDesc(User user);
     List<MusicWork> findAllByOrderByCreationDateDesc();
     Optional<MusicWork> findMusicWorkByIdAndUser(Long id, User user);
+    Optional<MusicWork> findMusicWorkById(Long id);
     Optional<MusicWork> findMusicWorkByTitleOrDescriptionOrderByCreationDateDesc(String title, String description);
 }
