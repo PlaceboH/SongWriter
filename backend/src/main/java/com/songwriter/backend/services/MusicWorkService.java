@@ -9,6 +9,7 @@ import com.songwriter.backend.repository.MusicWorkRepository;
 import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,13 @@ public class MusicWorkService {
     public static final Logger LOG = LoggerFactory.getLogger(MusicWorkService.class);
     public final MusicWorkRepository musicWorkRepository;
     public final UserRepository userRepository;
-
+    @Autowired
     public MusicWorkService(MusicWorkRepository musicWorkRepository, UserRepository userRepository) {
         this.musicWorkRepository = musicWorkRepository;
         this.userRepository = userRepository;
     }
 
-    public MusicWork createMusicWork(MusicWorkDTO musicWorkDTO, Principal principal) {
+    public MusicWork createUserActivityProduct(MusicWorkDTO musicWorkDTO, Principal principal) {
         User user = getUserByPrincipal(principal);
         MusicWork musicWork = new MusicWork();
         musicWork.setUser(user);
