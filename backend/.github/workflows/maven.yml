@@ -17,10 +17,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
+      working-directory: ./backend
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      working-directory: ./backend
       run: mvn -B package --file pom.xml
