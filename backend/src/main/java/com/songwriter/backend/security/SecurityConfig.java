@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         jsr250Enabled = true,
         prePostEnabled = true
 )
-public class SecurityConfig extends WebSecurityConfigurerAdapter { // TODO remove deprecated extends
+public class SecurityConfig extends WebSecurityConfigurerAdapter {  // TODO remove deprecated extends
 
     @Autowired
     private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -64,5 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // TODO remov
     public JWTAuthenticationFilter jwtAuthenticationFilter() {
         return new JWTAuthenticationFilter();
     }
+
 }
 

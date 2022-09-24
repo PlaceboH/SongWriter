@@ -1,7 +1,6 @@
 package com.songwriter.backend.repository;
 
 import com.songwriter.backend.entity.MusicWork;
-import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

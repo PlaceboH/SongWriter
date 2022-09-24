@@ -81,6 +81,13 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    public Post updatePost(PostDTO postDTO, Principal principal) {
+        Post post = getPostById(postDTO.getId(), principal);
+        post.setTitle(postDTO.getTitle());
+
+        return postRepository.save(post);
+    }
+
     public void deletePost(Long postId, Principal principal) {
         Post post = getPostById(postId, principal);
         Optional<ImageModel> imageModel = imageRepository.findByPostId(post.getId());
