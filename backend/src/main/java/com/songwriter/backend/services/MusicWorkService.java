@@ -28,7 +28,7 @@ public class MusicWorkService {
         this.userRepository = userRepository;
     }
 
-    public MusicWork createUserActivityProduct(MusicWorkDTO musicWorkDTO, Principal principal) {
+    public MusicWork createMusicWork(MusicWorkDTO musicWorkDTO, Principal principal) {
         User user = getUserByPrincipal(principal);
         MusicWork musicWork = new MusicWork();
         musicWork.setUser(user);
@@ -40,6 +40,16 @@ public class MusicWorkService {
         musicWork.setLikes(0);
 
         LOG.info("Saving musicWork for user: {}", user.getUsername());
+
+        return musicWorkRepository.save(musicWork);
+    }
+
+    public MusicWork updateMusicWork(MusicWorkDTO musicWorkDTO, Principal principal) {
+        MusicWork musicWork = getMusicWorkById(musicWorkDTO.getId(), principal);
+        musicWork.setTitle(musicWorkDTO.getTitle());
+        musicWork.setChords(musicWorkDTO.getChords());
+        musicWork.setLyrics(musicWorkDTO.getLyrics());
+        musicWork.setDescription(musicWorkDTO.getDescription());
 
         return musicWorkRepository.save(musicWork);
     }
