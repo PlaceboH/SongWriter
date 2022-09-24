@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/music-work")
@@ -47,6 +48,24 @@ public class MusicWorkController {
         MusicWorkDTO updateMusicWorkDTO = musicWorkFacade.musicWorkToMusicWorkDTO(musicWork);
 
         return new ResponseEntity<>(updateMusicWorkDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorks() {
+        List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllMusicWork()
+                .stream()
+                .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
+
+        return new ResponseEntity<>(musicWorkDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/musicWorks")
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForUser(Principal principal) {
+        List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllMusicWorkForUser(principal)
+                .stream()
+                .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
+
+        return new ResponseEntity<>(musicWorkDTOList, HttpStatus.OK);
     }
 
 }
