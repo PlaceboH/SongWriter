@@ -1,8 +1,11 @@
 package com.songwriter.backend.web;
 
 import com.songwriter.backend.dto.MusicWorkDTO;
+import com.songwriter.backend.dto.PostDTO;
 import com.songwriter.backend.entity.MusicWork;
+import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.facade.MusicWorkFacade;
+import com.songwriter.backend.payload.response.MessageResponse;
 import com.songwriter.backend.services.MusicWorkService;
 import com.songwriter.backend.validators.ResponseErrorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +69,22 @@ public class MusicWorkController {
                 .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
 
         return new ResponseEntity<>(musicWorkDTOList, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/{musicWorkId}/{username}/likeWork")
+    public ResponseEntity<MusicWorkDTO> likeMusicWork(@PathVariable("musicWorkId") String musicWorkId, @PathVariable("username") String username) {
+        MusicWork musicWork = musicWorkService.likeMusicWork(Long.parseLong(musicWorkId), username);
+        MusicWorkDTO musicWorkDTO = musicWorkFacade.musicWorkToMusicWorkDTO(musicWork);
+
+        return new ResponseEntity<>(musicWorkDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/{musicWorkId}/deleteWork")
+    public ResponseEntity<MessageResponse> deleteMusicWork(@PathVariable("musicWorkId") String musicWorkId, Principal principal) {
+        musicWorkService.deleteMusicWork(Long.parseLong(musicWorkId), principal);
+
+        return new ResponseEntity<>(new MessageResponse("Music work was deleted"), HttpStatus.OK);
     }
 
 }
