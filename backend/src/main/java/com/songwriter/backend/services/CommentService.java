@@ -5,6 +5,7 @@ import com.songwriter.backend.entity.Comment;
 import com.songwriter.backend.entity.MusicWork;
 import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.entity.User;
+import com.songwriter.backend.entity.enums.EComment;
 import com.songwriter.backend.exceptions.MusicWorkNotFoundException;
 import com.songwriter.backend.exceptions.PostNotFoundException;
 import com.songwriter.backend.repository.CommentRepository;
@@ -37,27 +38,19 @@ public class CommentService {
         this.userRepository = userRepository;
     }
 
-    public Comment savePostComment(Long postId, CommentDTO commentDTO, Principal principal) {
+    public Comment saveComment(Long id, CommentDTO commentDTO, Principal principal) {
         User user = getUserByPrincipal(principal);
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new PostNotFoundException("Post cannot be found for user: " + user.getUsername()));
         Comment comment = new Comment();
-        comment.setPost(post);
-        comment.setUserId(user.getId());
-        comment.setUsername(user.getUsername());
-        comment.setMessage(commentDTO.getMessage());
 
-        LOG.info("Saving comment {}",comment.getMessage());
-
-        return commentRepository.save(comment);
-    }
-
-    public Comment saveMusicWorkComment(Long musicWorkId, CommentDTO commentDTO, Principal principal) {
-        User user = getUserByPrincipal(principal);
-        MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
-                .orElseThrow(() -> new MusicWorkNotFoundException("Post cannot be found for user: " + user.getUsername()));
-        Comment comment = new Comment();
-        comment.setMusicWork(musicWork);
+        if (commentDTO.getEComment() == EComment.COMMENT_POST) {
+            Post post = postRepository.findById(id)
+                    .orElseThrow(() -> new PostNotFoundException("Post cannot be found for user: " + user.getUsername()));
+            comment.setPost(post);
+        } else {
+            MusicWork musicWork = musicWorkRepository.findById(id)
+                    .orElseThrow(() -> new MusicWorkNotFoundException("Music Work cannot be found for user: " + user.getUsername()));
+            comment.setMusicWork(musicWork);
+        }
         comment.setUserId(user.getId());
         comment.setUsername(user.getUsername());
         comment.setMessage(commentDTO.getMessage());
