@@ -1,9 +1,7 @@
 package com.songwriter.backend.web;
 
 import com.songwriter.backend.dto.MusicWorkDTO;
-import com.songwriter.backend.dto.PostDTO;
 import com.songwriter.backend.entity.MusicWork;
-import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.facade.MusicWorkFacade;
 import com.songwriter.backend.payload.response.MessageResponse;
 import com.songwriter.backend.services.MusicWorkService;
