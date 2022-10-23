@@ -27,7 +27,7 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void createUser(SignupRequest userSignupRequest) {
+    public User createUser(SignupRequest userSignupRequest) {
         User user = new User();
         user.setEmail(userSignupRequest.getEmail());
         user.setName(userSignupRequest.getFirstname());
@@ -37,10 +37,20 @@ public class UserService {
         user.getRoles().add(ERole.ROLE_USER);
         try {
             LOG.info("Saving user {}", userSignupRequest.getUsername());
-            userRepository.save(user);
+            return userRepository.save(user);
         } catch (Exception ex) {
             LOG.error("Error during registration, {}", ex.getMessage());
             throw new UserExistException("User " + user.getUsername() + " already exist. Please check credentials");
+        }
+    }
+
+    public User deleteUserById(long userId, Principal principal) {
+        User user = getUserByPrincipal(principal);
+        if (user.getId() == userId || user.getRoles().contains(ERole.ROLE_ADMIN)) {
+            return userRepository.deleteUserById(user.getId())
+                    .orElseThrow(() -> new UsernameNotFoundException("Username not found with id" + user.getId()));
+        } else {
+            return null;
         }
     }
 
@@ -57,6 +67,12 @@ public class UserService {
         return userRepository.findUserById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
     public User getCurrentUser(Principal principal) {
         return getUserByPrincipal(principal);
     }
