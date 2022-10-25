@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("api/comment")
@@ -43,8 +44,9 @@ public class CommentController {
     }
 
     @GetMapping("/{musicWorkId}/all")
-    public ResponseEntity<List<CommentDTO>> getAllMusicWorkComments(@PathVariable("musicWorkId") String musicWorkId) {
+    public ResponseEntity<List<CommentDTO>> getAllMusicWorkComments(@PathVariable("musicWorkId") String musicWorkId) throws ExecutionException, InterruptedException {
         List<CommentDTO> commentDTOList = commentService.getAllCommentsForMusicWork(Long.parseLong(musicWorkId))
+                .get()
                 .stream()
                 .map((comment -> {
                     CommentDTO commentDTO = commentFacade.commentToCommentDTO(comment);
@@ -57,8 +59,9 @@ public class CommentController {
 
 
     @GetMapping("/{postId}/all")
-    public ResponseEntity<List<CommentDTO>> getAllPostComments(@PathVariable("postId") String postId) {
+    public ResponseEntity<List<CommentDTO>> getAllPostComments(@PathVariable("postId") String postId) throws ExecutionException, InterruptedException {
         List<CommentDTO> commentDTOList = commentService.getAllCommentsForPost(Long.parseLong(postId))
+                .get()
                 .stream()
                 .map((comment -> {
                     CommentDTO commentDTO = commentFacade.commentToCommentDTO(comment);

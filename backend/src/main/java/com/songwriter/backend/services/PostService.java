@@ -12,12 +12,14 @@ import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class PostService {
@@ -46,8 +48,9 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public List<Post> getAllPost() {
-        return postRepository.findAllByOrderByCreationDateDesc();
+    @Async
+    public CompletableFuture<List<Post>> getAllPost() {
+        return CompletableFuture.completedFuture(postRepository.findAllByOrderByCreationDateDesc());
     }
 
     public Post getPostById(Long postId, Principal principal) {
@@ -57,10 +60,11 @@ public class PostService {
                 .orElseThrow(() -> new PostNotFoundException("Post cannot be found username: " + user.getUsername()));
     }
 
-    public List<Post> getAllPostForUser(Principal principal) {
+    @Async
+    public CompletableFuture<List<Post>> getAllPostForUser(Principal principal) {
         User user = getUserByPrincipal(principal);
 
-        return postRepository.findAllByUserOrderByCreationDateDesc(user);
+        return CompletableFuture.completedFuture(postRepository.findAllByUserOrderByCreationDateDesc(user));
     }
 
     public Post likePost(Long postId, String username) {

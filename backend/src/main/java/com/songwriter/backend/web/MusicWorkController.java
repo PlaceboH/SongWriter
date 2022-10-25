@@ -1,9 +1,7 @@
 package com.songwriter.backend.web;
 
 import com.songwriter.backend.dto.MusicWorkDTO;
-import com.songwriter.backend.dto.PostDTO;
 import com.songwriter.backend.entity.MusicWork;
-import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.facade.MusicWorkFacade;
 import com.songwriter.backend.payload.response.MessageResponse;
 import com.songwriter.backend.services.MusicWorkService;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("api/music-work")
@@ -54,8 +53,9 @@ public class MusicWorkController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<MusicWorkDTO>> getAllWorks() {
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorks() throws ExecutionException, InterruptedException {
         List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllMusicWork()
+                .get()
                 .stream()
                 .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
 
@@ -63,8 +63,9 @@ public class MusicWorkController {
     }
 
     @GetMapping("/user/musicWorks")
-    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForUser(Principal principal) {
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForUser(Principal principal) throws ExecutionException, InterruptedException {
         List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllMusicWorkForUser(principal)
+                .get()
                 .stream()
                 .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
 

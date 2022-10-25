@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("api/post")
@@ -53,8 +54,9 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<PostDTO>> getAllPosts() {
+    public ResponseEntity<List<PostDTO>> getAllPosts() throws ExecutionException, InterruptedException {
         List<PostDTO> postDTOList = postService.getAllPost()
+                .get()
                 .stream()
                 .map(postFacade::postToPostDTO).toList();
 
@@ -62,8 +64,9 @@ public class PostController {
     }
 
     @GetMapping("/user/posts")
-    public ResponseEntity<List<PostDTO>> getAllPostsForUser(Principal principal) {
+    public ResponseEntity<List<PostDTO>> getAllPostsForUser(Principal principal) throws ExecutionException, InterruptedException {
         List<PostDTO> postDTOList = postService.getAllPostForUser(principal)
+                .get()
                 .stream()
                 .map(postFacade::postToPostDTO).toList();
 
