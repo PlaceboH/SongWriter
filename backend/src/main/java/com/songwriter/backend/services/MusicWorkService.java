@@ -10,12 +10,14 @@ import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class MusicWorkService {
@@ -54,8 +56,9 @@ public class MusicWorkService {
         return musicWorkRepository.save(musicWork);
     }
 
-    public List<MusicWork> getAllMusicWork() {
-        return musicWorkRepository.findAllByOrderByCreationDateDesc();
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllMusicWork() {
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByOrderByCreationDateDesc());
     }
 
     public MusicWork getMusicWorkById(Long musicWorkId, Principal principal) {
@@ -65,10 +68,11 @@ public class MusicWorkService {
                 .orElseThrow(() -> new MusicWorkNotFoundException("MusicWork cannot be found username: " + user.getUsername()));
     }
 
-    public List<MusicWork> getAllMusicWorkForUser(Principal principal) {
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllMusicWorkForUser(Principal principal) {
         User user = getUserByPrincipal(principal);
 
-        return musicWorkRepository.findAllByUserOrderByCreationDateDesc(user);
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
 
     public MusicWork likeMusicWork(Long musicWorkId, String username) {

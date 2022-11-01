@@ -15,12 +15,14 @@ import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class CommentService {
@@ -60,16 +62,18 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public List<Comment> getAllCommentsForPost(Long postId) {
+    @Async
+    public CompletableFuture<List<Comment>> getAllCommentsForPost(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException("Cannot found any posts"));
-        return commentRepository.findAllByPost(post);
+        return CompletableFuture.completedFuture(commentRepository.findAllByPost(post));
     }
 
-    public List<Comment> getAllCommentsForMusicWork(Long musicWorkId) {
+    @Async
+    public CompletableFuture<List<Comment>> getAllCommentsForMusicWork(Long musicWorkId) {
         MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
                 .orElseThrow(() -> new MusicWorkNotFoundException("Cannot found any music works"));
-        return commentRepository.findAllByMusicWork(musicWork);
+        return CompletableFuture.completedFuture(commentRepository.findAllByMusicWork(musicWork));
     }
 
     public void deleteComment(Long commentId) {
