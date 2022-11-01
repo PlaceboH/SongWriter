@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
 import { authInterceptorProviders } from './app/healper/auth-interceptor.service';
+import { authErrorInterceptorProviders } from './app/healper/error-interceptor.service';
 
 import { environment } from './environments/environment';
 
@@ -15,6 +16,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     // AnalyticsService,
     authInterceptorProviders,
+    authErrorInterceptorProviders,
     importProvidersFrom([AppRoutingModule, BrowserAnimationsModule])
   ],
 });
