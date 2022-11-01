@@ -1,0 +1,33 @@
+@import "../../global.scss";
+
+.feature-box {
+    height: 30rem;
+    background-color: rgba($color-white, .8);
+    font-size: 1.3rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 2.5rem 5rem rgba($color-black, .25);
+    transition: transform .3s;
+
+    @include respond(tab-port) {
+        padding: 2rem;
+    }
+
+    &__icon {
+        font-size: 6rem;
+        margin-bottom: .5rem;
+        display: inline-block;
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+        background-clip: text;
+        color: transparent;
+
+        @include respond(tab-port) {
+            margin-bottom: 0;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+}
