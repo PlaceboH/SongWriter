@@ -13,9 +13,13 @@ export class AuthInterceptorService implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         const currentUser = this.tokenService.getUser();
-        if(currentUser) {
-            return true;
+        
+        if(!currentUser) {
+            this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+        
+            return false;
         }
-        this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+
+        return true;
     }
 }
