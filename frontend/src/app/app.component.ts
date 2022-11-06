@@ -1,6 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { SharedModule } from './shared/shared.module';
+
 
 @Component({
   standalone: true,
@@ -10,4 +12,10 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['en', 'pl']);
+    translate.setDefaultLang('en');
+  }
 }
