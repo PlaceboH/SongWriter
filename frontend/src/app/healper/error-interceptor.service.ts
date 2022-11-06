@@ -21,7 +21,7 @@ export class AuthErrorInterceptorService implements HttpInterceptor {
             }
 
             const error = err.error.message || err.statusText;
-            this.notificationService.showSnackBar(error);
+            this.notificationService.showErrorSnackBar(error);
 
             return throwError(() => new Error(error));
         }))

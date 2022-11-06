@@ -12,5 +12,4 @@ import { SwButtonComponent } from "src/app/shared/custom-components/sw-button/sw
     ngOnInit(): void {
         
     }
-
   }
