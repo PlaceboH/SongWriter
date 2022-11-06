@@ -1,5 +1,4 @@
 @import "../shared/global.scss";
-@import "./navigation-page/navigation-page.component.scss";
 @import "./header-section/header-section.component.scss";
 @import "./main-info-section/main-info-section.component.scss";
 
@@ -51,7 +50,7 @@ body {
     line-height: 1.7;
     color: $color-grey-dark;
     box-sizing: border-box;
-    padding: 3rem;
+    padding: 2rem;
 
     @include respond(tab-port) {
         padding: 0;

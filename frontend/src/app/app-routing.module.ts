@@ -1,25 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { WelcomePageComponent } from './walcome-page/welcome-page.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 const routes: Route[] = [
   {
     path: '',
     component: WelcomePageComponent,
   },
-  // {
-  //   path: 'about',
-  //   // component: AboutComponent,
-  //   loadComponent: () =>
-  //     import('./about/about.component').then((mod) => mod.AboutComponent),
-  // },
-  // {
-  //   path: 'dashboard',
-  //   loadChildren: () =>
-  //     import('./dashboard/routes').then(
-  //       (mod) => mod.DASHBOARD_ROUTES
-  //     ),
-  // },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth-page/routes').then((mod) => mod.AUTH_ROUTES),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./home-page/routes').then((mod) => mod.HOME_ROUTES),
+  },
 ];
 
 @NgModule({

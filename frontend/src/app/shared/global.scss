@@ -30,7 +30,28 @@ $gutter-vertical: 8rem;
 $gutter-vertical-small: 6rem;
 $gutter-horizontal: 3rem;
 
+.input-field {
+    width: 20vw;
+}
 
+.succeed-snackbar {
+    background: $color-primary-light;
+    color: white;
+}
+.succeed-snackbar button {
+    background-color: $color-primary-dark;
+    color: white;
+    border: none;
+}
+.unsucceed-snackbar {
+    background: $color-grey-dark;
+    color: white;
+}
+.unsucceed-snackbar button {
+    background-color: $color-grey-dark-3;
+    color: white !important;
+    border: none;
+}
 
 @mixin clearfix {
     &::after {
@@ -62,6 +83,3 @@ $gutter-horizontal: 3rem;
         @media only screen and (min-width: 112.5em) { @content };    //1800
     }
 }
-
-
-
