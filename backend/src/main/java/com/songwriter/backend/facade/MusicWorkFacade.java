@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MusicWorkFacade {
-
     public MusicWorkDTO musicWorkToMusicWorkDTO(MusicWork musicWork) {
         MusicWorkDTO musicWorkDTO = new MusicWorkDTO();
         musicWorkDTO.setId(musicWork.getId());

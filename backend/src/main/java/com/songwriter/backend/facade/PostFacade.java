@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PostFacade {
-
     public PostDTO postToPostDTO(Post post) {
         PostDTO postDTO = new PostDTO();
         postDTO.setId(post.getId());
@@ -15,7 +14,6 @@ public class PostFacade {
         postDTO.setCaption(post.getCaption());
         postDTO.setLikes(post.getLikes());
         postDTO.setUsersLiked(post.getLikedUsers());
-
 
         return postDTO;
     }

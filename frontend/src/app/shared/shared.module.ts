@@ -1,4 +1,5 @@
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ],
     exports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         TranslateModule,
     ],

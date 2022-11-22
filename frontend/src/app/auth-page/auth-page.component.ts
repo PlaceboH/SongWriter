@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { NavigationPageComponent } from '../shared/custom-components/sw-navigation-page/sw-navigation-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { NavigationPageComponent } from '../shared/custom-components/sw-navigation-page/sw-navigation-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,

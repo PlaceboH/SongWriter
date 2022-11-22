@@ -1,6 +1,7 @@
 package com.songwriter.backend.services;
 
 import com.songwriter.backend.dto.UserDTO;
+import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.entity.enums.ERole;
 import com.songwriter.backend.exceptions.UserExistException;
@@ -9,11 +10,14 @@ import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UserService {
@@ -52,7 +56,10 @@ public class UserService {
 
         return userRepository.save(user);
     }
-
+    @Async
+    public CompletableFuture<List<User>> getAllUsers() {
+        return CompletableFuture.completedFuture(userRepository.findAllByOrderByCreationDateDesc());
+    }
     public User getUserById(long userId) {
         return userRepository.findUserById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
@@ -60,7 +67,6 @@ public class UserService {
     public User getCurrentUser(Principal principal) {
         return getUserByPrincipal(principal);
     }
-
 
     private User getUserByPrincipal(Principal principal) {
         String username = principal.getName();
