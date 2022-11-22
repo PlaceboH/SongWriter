@@ -6,7 +6,7 @@ import { TokenStorageService } from "../auth-page/token-storage.service";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthInterceptorService implements CanActivate {
+export class AuthGuardService implements CanActivate {
 
     constructor(private router: Router,
                 private tokenService: TokenStorageService) {}
@@ -15,7 +15,7 @@ export class AuthInterceptorService implements CanActivate {
         const currentUser = this.tokenService.getUser();
         
         if(!currentUser) {
-            this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+            this.router.navigate(['/auth/login'], {queryParams: {returnUrl: state.url}});
         
             return false;
         }

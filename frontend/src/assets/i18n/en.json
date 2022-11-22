@@ -1,4 +1,11 @@
 {
-    "welcome.header.title": "Song  Writer",
-    "welcome.header.subtitle": "share your work with others"
+    "songwriter.login": "Login",
+    "songwriter.logout": "Logout",
+    "songwriter.register": "Register",
+    "welcome.header.title": "Song Writer",
+    "welcome.header.subtitle": "share your work with others",
+
+    "home.header.title": "SongWriter",
+    "home.header.profile": "Profile"
+
 }

@@ -1,0 +1,21 @@
+@import "./global.scss";
+
+
+.user-profile {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    padding-top: 3rem;
+  }
+  
+  .profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+  }
+  
