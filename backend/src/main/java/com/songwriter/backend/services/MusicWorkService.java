@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -71,6 +72,19 @@ public class MusicWorkService {
     @Async
     public CompletableFuture<List<MusicWork>> getAllMusicWorkForUser(Principal principal) {
         User user = getUserByPrincipal(principal);
+
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
+    }
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllWorksForChosenUser(String username, Principal principal) {
+        User user = getUserByPrincipal(principal);
+
+        User subscribedUser = userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
+
+        if ( !user.getSubscribedUsers().contains(subscribedUser) ) {
+            return null;
+        }
 
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }

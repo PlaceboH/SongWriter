@@ -1,8 +1,10 @@
 package com.songwriter.backend.dto;
 
+import com.songwriter.backend.entity.User;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -13,4 +15,7 @@ public class UserDTO {
     private String lastname;
     private String username;
     private String bio;
+
+    private List<User> subscribedUsers;
+    private List<User> UserFollowers;
 }

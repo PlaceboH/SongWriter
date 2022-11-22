@@ -8,6 +8,7 @@ import java.util.Set;
 @Data
 public class PostDTO {
     private Long id;
+    @NotEmpty
     private String title;
     private String caption;
     @NotEmpty

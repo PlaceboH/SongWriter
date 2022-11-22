@@ -38,8 +38,8 @@ import { UserService } from "src/app/shared/services/user.service";
     }
   
     logout(): void {
+      this.router.navigate(['login']);
       this.tokenService.logOut();
-      this.router.navigate(['/auth/login']);
     }
   
   }

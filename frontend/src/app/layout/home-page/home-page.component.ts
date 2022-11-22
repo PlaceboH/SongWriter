@@ -1,15 +1,15 @@
 import { Component, OnInit } from "@angular/core";
+import { EditUserComponent } from "./edit-user/edit-user.component";
+import { ImageUploadService } from "src/app/shared/services/image.service";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { MaterialModule } from "src/app/material.module";
 import { NavigationComponent } from "../navigation/navigation.component";
 import { NotificationService } from "src/app/shared/services/notification.service";
+import { PostService } from "src/app/shared/services/post.service";
 import { SharedModule } from "src/app/shared/shared.module";
+import { TokenStorageService } from "src/app/auth-page/token-storage.service";
 import { User } from "src/app/shared/models/User";
 import { UserService } from "src/app/shared/services/user.service";
-import { TokenStorageService } from "src/app/auth-page/token-storage.service";
-import { PostService } from "src/app/shared/services/post.service";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { ImageUploadService } from "src/app/shared/services/image.service";
-import { EditUserComponent } from "./edit-user/edit-user.component";
 
 @Component({
     standalone: true,

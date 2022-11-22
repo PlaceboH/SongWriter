@@ -22,7 +22,7 @@ export const AUTH_ROUTES: Route[] = [
         path: 'home',
         loadChildren: () =>
           import('../layout/routes').then((mod) => mod.HOME_ROUTES),
-      },
+    },
     { 
         path: '**', 
         component: AuthPageComponent 

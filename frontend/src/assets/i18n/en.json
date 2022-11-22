@@ -1,11 +1,15 @@
 {
     "songwriter.login": "Login",
     "songwriter.logout": "Logout",
+    "songwriter.update": "Update",
+    "songwriter.cancel": "Cancel",
     "songwriter.register": "Register",
     "welcome.header.title": "Song Writer",
     "welcome.header.subtitle": "share your work with others",
 
     "home.header.title": "SongWriter",
-    "home.header.profile": "Profile"
+    "home.header.profile": "Profile",
+
+    "home.edit.user.title": "Edit User Profile"
 
 }

@@ -73,6 +73,17 @@ public class MusicWorkController {
     }
 
 
+    @GetMapping("/{username}/musicWorks")
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForChosenUser(@PathVariable("username") String username, Principal principal) throws ExecutionException, InterruptedException {
+        List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllWorksForChosenUser(username, principal)
+                .get()
+                .stream()
+                .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();
+
+        return new ResponseEntity<>(musicWorkDTOList, HttpStatus.OK);
+    }
+
+
     @PostMapping("/{musicWorkId}/{username}/likeWork")
     public ResponseEntity<MusicWorkDTO> likeMusicWork(@PathVariable("musicWorkId") String musicWorkId, @PathVariable("username") String username) {
         MusicWork musicWork = musicWorkService.likeMusicWork(Long.parseLong(musicWorkId), username);

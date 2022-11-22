@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserFacade {
-
     public UserDTO userToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
@@ -14,6 +13,8 @@ public class UserFacade {
         userDTO.setLastname(user.getLastname());
         userDTO.setBio(user.getBio());
         userDTO.setUsername(user.getUsername());
+        userDTO.setSubscribedUsers(user.getSubscribedUsers());
+        userDTO.setUserFollowers(user.getUserFollower());
 
         return userDTO;
     }

@@ -1,5 +1,6 @@
 package com.songwriter.backend.web;
 
+import com.songwriter.backend.dto.PostDTO;
 import com.songwriter.backend.dto.UserDTO;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.facade.UserFacade;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("api/user")
@@ -41,6 +44,17 @@ public class UserController {
         UserDTO userDTO = userFacade.userToUserDTO(user);
 
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserDTO>> getAllUsers() throws ExecutionException, InterruptedException {
+        List<UserDTO> userDTOList = userService.getAllUsers()
+                .get()
+                .stream()
+                .map(userFacade::userToUserDTO).toList();
+
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
     }
 
     @PostMapping("/update")

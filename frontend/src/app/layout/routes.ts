@@ -18,5 +18,6 @@ export const HOME_ROUTES: Route[] = [
         path: 'login',
         loadChildren: () =>
           import('../auth-page/routes').then((mod) => mod.AUTH_ROUTES),
+        canActivate: [AuthGuardService]
     },
 ];

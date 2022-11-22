@@ -4,6 +4,7 @@ import lombok.Data;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,10 +17,13 @@ public class Mark {
     @JoinColumn(name = "comment_id")
     private Comment comment;
     @JsonIgnore
-    private Long userId;
-    @JsonIgnore
     private Long musicWorkId;
     @Column(nullable = false)
     private String username;
-
+    @Column(updatable = false)
+    private LocalDateTime creationDate;
+    @PrePersist
+    protected void onCreate(){
+        this.creationDate = LocalDateTime.now();
+    }
 }
