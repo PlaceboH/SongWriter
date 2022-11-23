@@ -4,12 +4,28 @@
     "songwriter.update": "Update",
     "songwriter.cancel": "Cancel",
     "songwriter.register": "Register",
+
+
     "welcome.header.title": "Song Writer",
     "welcome.header.subtitle": "share your work with others",
 
+
     "home.header.title": "SongWriter",
     "home.header.profile": "Profile",
+    "home.header.upload": "Upload",
+    "home.header.pickFile": "Pick File",
+    "home.edit.user.title": "Edit User Profile",
+    "home.edit.user.firstName": "First name",
+    "home.edit.user.lastName": "Last name",
+    "home.edit.user.biography": "Biography",
 
-    "home.edit.user.title": "Edit User Profile"
+
+
+    "home.tabs.generalInformation": "General Information",
+    "home.tabs.myWorks": "My Music Works",
+    "home.tabs.myPosts": "My Posts",
+    "home.tabs.about": "About",
+    "home.tabs.aboutMe": "About Me",
+    "home.tabs.editInfo": "Edit Info"
 
 }

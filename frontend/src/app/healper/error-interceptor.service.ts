@@ -15,13 +15,15 @@ export class AuthErrorInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(catchError(err => {
-            if (err.satus === 401) {
-                this.tokenService.logOut();
-                window.location.reload();
-            }
+            // if (err.satus === 401) {
+            //     this.tokenService.logOut();
+            //     window.location.reload();
+            // }
 
             const error = err.error.message || err.statusText;
             this.notificationService.showErrorSnackBar(error);
+            this.tokenService.logOut();
+            window.location.reload();
 
             return throwError(() => new Error(error));
         }))

@@ -1,0 +1,29 @@
+@import "../../../shared/global.scss";
+
+.toolbar {
+    padding: 2em;
+    justify-content: center;
+}
+  
+.content {
+    padding-top: 5em;
+    padding-bottom: 5em;
+    background-color: $color-grey-light-2;
+}
+
+.editButton {
+    margin-left: 2em;
+}
+
+.profile-box.info-box .info-line {
+    margin-bottom: 24px;
+}
+.profile-box.info-box .info-line .title {
+    font-size: 14px;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+.profile-box.info-box .info-line .info {
+    font-size: 13px;
+}
+  

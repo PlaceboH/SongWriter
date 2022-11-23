@@ -1,18 +1,18 @@
 <div>
-    <h2>{{'home.edit.user.title' | translate}}</h2>
+    <h2>{{ 'home.edit.user.title' | translate }}</h2>
     <form [formGroup]="profileEditForm">
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label>First name</mat-label>
+        <mat-label>{{ 'home.edit.user.firstName' | translate }}</mat-label>
         <input matInput
                formControlName="firstName">
       </mat-form-field>
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Last name</mat-label>
+        <mat-label>{{ 'home.edit.user.lastName' | translate }}</mat-label>
         <input matInput
                formControlName="lastName">
       </mat-form-field>
       <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Biography</mat-label>
+        <mat-label>{{ 'home.edit.user.biography' | translate }}</mat-label>
         <input matInput
                formControlName="bio">
       </mat-form-field>
