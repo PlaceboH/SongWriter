@@ -43,7 +43,7 @@ public class CommentController {
         return new ResponseEntity<>(createCommentDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{musicWorkId}/all")
+    @GetMapping("/{musicWorkId}/allM")
     public ResponseEntity<List<CommentDTO>> getAllMusicWorkComments(@PathVariable("musicWorkId") String musicWorkId) throws ExecutionException, InterruptedException {
         List<CommentDTO> commentDTOList = commentService.getAllCommentsForMusicWork(Long.parseLong(musicWorkId))
                 .get()
@@ -60,6 +60,7 @@ public class CommentController {
 
     @GetMapping("/{postId}/all")
     public ResponseEntity<List<CommentDTO>> getAllPostComments(@PathVariable("postId") String postId) throws ExecutionException, InterruptedException {
+
         List<CommentDTO> commentDTOList = commentService.getAllCommentsForPost(Long.parseLong(postId))
                 .get()
                 .stream()

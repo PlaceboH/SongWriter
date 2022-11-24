@@ -9,7 +9,7 @@ import { EditUserComponent } from "../edit-user/edit-user.component";
 @Component({
     standalone: true,
     imports: [SharedModule, MaterialModule, NavigationComponent],
-    selector: 'user-about-section',
+    selector: 'app-user-about-section',
     templateUrl: './user-about-section.component.html',
     styleUrls: ['./user-about-section.component.scss']
   })

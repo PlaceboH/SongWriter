@@ -14,7 +14,6 @@ public class MusicWorkDTO {
     private String lyrics;
     @NotEmpty
     private String title;
-    @NotEmpty
     private String username;
     private Integer likes;
     private Set<MarkDTO> markDTOSet;

@@ -1,5 +1,10 @@
 @import "../../../shared/global.scss";
 
+.post-card {
+    display: block;
+    margin: 1rem auto;
+    width: 80%;
+}
 .toolbar {
     padding: 2em;
     justify-content: center;

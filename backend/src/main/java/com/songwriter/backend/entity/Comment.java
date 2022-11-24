@@ -13,23 +13,24 @@ public class Comment {
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private MusicWork musicWork;
+
     @Column(nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String message;
+
     @Column(nullable = false)
     private Long userId;
 
     private Integer likes;
-
     @Column(updatable = false)
     private LocalDateTime creationDate;
     @PrePersist
     protected void onCreate(){
         this.creationDate = LocalDateTime.now();
     }
-
-
 }

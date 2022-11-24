@@ -38,7 +38,7 @@ public class MarkService {
 
         MusicWork musicWork = musicWorkRepository.findById(id)
                 .orElseThrow(() -> new MusicWorkNotFoundException("Music Work cannot be found for user: " + user.getUsername()));
-        mark.setMusicWorkId(musicWork.getId());
+        mark.setMusicWork(musicWork);
         mark.setUsername(user.getUsername());
         mark.setComment(markDTO.getComment());
         mark.setStars(markDTO.getStars());
@@ -48,12 +48,12 @@ public class MarkService {
         return markRepository.save(mark);
     }
 
-    @Async
-    public CompletableFuture<List<Mark>> getAllMarksForMusicWork(Long musicWorkId) {
+//    @Async
+    public List<Mark> getAllMarksForMusicWork(Long musicWorkId) {
         MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
                 .orElseThrow(() -> new PostNotFoundException("Cannot found any posts"));
 
-        return CompletableFuture.completedFuture(markRepository.findAllByMusicWorkIdOrderByCreationDateDesc(musicWork.getId()));
+        return markRepository.findAllByMusicWorkIdOrderByCreationDateDesc(musicWork.getId());
     }
 
     public void deleteMark(Long markId) {

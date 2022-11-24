@@ -1,0 +1,41 @@
+<div *ngIf="isUserPostsLoaded">
+
+    <div class="profile-box info-box general">
+        <mat-toolbar  class="toolbar">
+            <div >{{ 'home.tabs.myPosts.userPosts' | translate }}</div>
+            <button class="editButton" mat-flat-button color="primary" (click)="openEditDialog()" >Add Post</button>
+        </mat-toolbar>
+        
+
+        <div class="content">
+            <h2>{{posts.length}} Posts</h2>
+            <mat-card class="post-card" *ngFor="let post of posts; let i = index">
+                <mat-card-header style="text-align: left">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{post.title}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="formatImage(post.image)" alt="post image">
+                <mat-card-content>
+                    <p>{{ post.caption }}</p>
+                </mat-card-content>
+            
+                <div style="text-align: left">
+                    <p *ngFor="let comment of post.comments; let c = index"> <span style="font-weight: 500">{{ comment.username }}</span>: {{ comment.message }}
+                    <button color="accent" mat-button (click)="deleteComment(comment.id, i, c)">
+                        <mat-icon color="accent">clear</mat-icon>
+                    </button>
+                    </p>
+                </div>
+            
+                <mat-card-actions align="end">
+                    <button color="warn" mat-button (click)="removePost(post, i)">
+                    <mat-icon color="warn">delete</mat-icon>
+                    Remove Post
+                    </button>
+                </mat-card-actions>
+            
+                <mat-card-subtitle align="start">Likes: {{post.likes}} <span *ngIf="post.likes > 0">by {{post.userLiked}}</span></mat-card-subtitle>
+            </mat-card>
+        </div>
+    </div>
+</div>

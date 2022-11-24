@@ -1,6 +1,4 @@
 <app-navigation></app-navigation>
-
-
 <div id="profile" *ngIf="isUserDataLoaded">
   <div class="header"></div>
     <div  class="bg-text">
@@ -20,14 +18,17 @@
       </div> -->
     </div>
 
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab label="About">
-    <user-about-section [userData]="user"></user-about-section>
-  </mat-tab>
-  <mat-tab label="Photos">
-  </mat-tab>
-  <mat-tab label="Social">
-  </mat-tab>
-</mat-tab-group>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="{{ 'home.tab.about' | translate }}">
+      <app-user-about-section [userData]="user"></app-user-about-section>
+    </mat-tab>
+    <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
+      MUSIC WORKS
+    </mat-tab>
+    <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
+      <app-user-posts-section>
+      </app-user-posts-section>
+    </mat-tab>
+  </mat-tab-group>
 
 </div>

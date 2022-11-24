@@ -9,13 +9,14 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { User } from "src/app/shared/models/User";
 import { UserAboutComponent } from "./user-about-section/user-about-section.component";
 import { UserService } from "src/app/shared/services/user.service";
+import { UserPostsComponent } from "./user-posts-section/user-posts-section.component";
 
 @Component({
     standalone: true,
+    imports: [SharedModule, MaterialModule, NavigationComponent, UserAboutComponent, UserPostsComponent],
     selector: 'home-page',
     templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.scss'],
-    imports: [SharedModule, MaterialModule, NavigationComponent, UserAboutComponent]
+    styleUrls: ['./home-page.component.scss']
 })
   export class HomePageComponent implements OnInit {
 
