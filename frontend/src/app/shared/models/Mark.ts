@@ -1,7 +1,6 @@
 export interface Mark {
     id?: number;
-    musicWorkId: number;
     stars: number;
-    comment?: Comment;
+    message: string;
     username: string;
 }
