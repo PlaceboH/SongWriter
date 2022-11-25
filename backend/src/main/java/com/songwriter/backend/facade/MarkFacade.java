@@ -11,7 +11,8 @@ public class MarkFacade {
         markDTO.setId(mark.getId());
         markDTO.setUsername(mark.getUsername());
         markDTO.setStars(mark.getStars());
-        markDTO.setComment(mark.getComment());
+        markDTO.setMessage(mark.getMessage());
+
         return markDTO;
     }
 }

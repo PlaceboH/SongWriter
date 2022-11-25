@@ -7,12 +7,12 @@
         </mat-toolbar>
         
 
-        <div class="content">
+        <div class="content post-list">
             <h2>{{posts.length}} Posts</h2>
             <mat-card class="post-card" *ngFor="let post of posts; let i = index">
                 <mat-card-header style="text-align: left">
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{post.title}}</mat-card-title>
+                    <div mat-card-avatar class="post-card__post-image"></div>
+                    <mat-card-title class="post-card__post-title">{{post.title}}</mat-card-title>
                 </mat-card-header>
                 <img mat-card-image [src]="formatImage(post.image)" alt="post image">
                 <mat-card-content>

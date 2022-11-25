@@ -14,9 +14,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Post post;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private MusicWork musicWork;
-
     @Column(nullable = false)
     private String username;
 

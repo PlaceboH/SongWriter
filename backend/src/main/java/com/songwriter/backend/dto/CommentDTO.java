@@ -1,6 +1,5 @@
 package com.songwriter.backend.dto;
 
-import com.songwriter.backend.entity.enums.EComment;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +11,4 @@ public class CommentDTO {
     private String message;
     private String username;
     private Integer likes;
-    @NotEmpty
-    private EComment eComment;
 }

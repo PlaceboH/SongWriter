@@ -22,6 +22,12 @@ public class Mark {
 
     @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
+    private Long userId;
+
+    @Column(nullable = false)
+    private String message;
     @Column(updatable = false)
     private LocalDateTime creationDate;
     @PrePersist

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Post} from '../models/Post';
-import {catchError, EMPTY, map, Observable, tap} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Post } from '../models/Post';
+import { Observable } from 'rxjs';
 
 const POST_API = 'http://localhost:8080/api/post/';
 

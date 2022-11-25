@@ -51,6 +51,7 @@ public class ImageUploadService {
         imageModel.setUserId(user.getId());
         imageModel.setImageBytes(compressBytes(file.getBytes()));
         imageModel.setName(file.getOriginalFilename());
+
         return imageRepository.save(imageModel);
     }
 
@@ -144,5 +145,4 @@ public class ImageUploadService {
                 }
         );
     }
-
 }

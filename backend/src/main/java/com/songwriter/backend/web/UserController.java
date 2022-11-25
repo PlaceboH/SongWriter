@@ -4,6 +4,7 @@ import com.songwriter.backend.dto.PostDTO;
 import com.songwriter.backend.dto.UserDTO;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.facade.UserFacade;
+import com.songwriter.backend.payload.response.MessageResponse;
 import com.songwriter.backend.services.UserService;
 import com.songwriter.backend.validators.ResponseErrorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,13 @@ public class UserController {
         UserDTO userDTOUpdated = userFacade.userToUserDTO(user);
 
         return new ResponseEntity<>(userDTOUpdated, HttpStatus.OK);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<MessageResponse> deleteUser(Principal principal) {
+        userService.deleteUser(principal);
+
+        return new ResponseEntity<>(new MessageResponse("User was deleted"), HttpStatus.OK);
     }
 
 }
