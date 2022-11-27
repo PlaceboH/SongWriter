@@ -1,0 +1,16 @@
+<div class="content">
+    <h2>Users </h2>
+    <mat-card class="user-card" *ngFor="let user of users; let i = index">
+        <img class="user-image" mat-card-image [src]="formatImage(user.image) || 'https://img.icons8.com/ios/512/no-camera.png' "  alt="user image">
+        <div class="card-general">
+            <mat-card-title> {{ user.username }}</mat-card-title>
+            <mat-card-content>
+                <span class="card-general__name">{{ user.firstname }}</span>
+                <span class="card-general__name">{{ user.lastname }}</span>
+                <div class="card-general__subscribe">
+                    <button mat-button color="primary" ><mat-icon>person_add</mat-icon> Subscribe</button >
+                </div>
+            </mat-card-content>
+        </div>
+    </mat-card>
+</div>

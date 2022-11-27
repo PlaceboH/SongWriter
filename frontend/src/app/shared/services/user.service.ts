@@ -19,6 +19,9 @@ export class UserService {
         return this.http.get(USER_API);
     }
 
+    getAllUsers(): Observable<any> {
+        return this.http.get(USER_API + 'all');
+    }
     updateUser(user: any): Observable<any> {
         return this.http.post(USER_API + 'update', user);
     }

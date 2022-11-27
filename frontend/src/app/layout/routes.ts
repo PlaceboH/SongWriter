@@ -3,6 +3,7 @@ import { AuthGuardService } from "../healper/auth-guard.service";
 import { HomePageComponent } from "./home-page/home-page.component";
 import { ManageMusicWorkComponent } from "./home-page/music-works-section/manage-music-work/manage-music-work.component";
 import { LayoutComponent } from "./layout.component";
+import { UsersPageComponent } from "./users-page/users-page.component";
 
 export const HOME_ROUTES: Route[] = [
     { 
@@ -12,6 +13,11 @@ export const HOME_ROUTES: Route[] = [
             { 
                 path: 'profile', 
                 component: HomePageComponent,
+                canActivate: [AuthGuardService],
+            },
+            { 
+                path: 'users', 
+                component: UsersPageComponent,
                 canActivate: [AuthGuardService],
             },
             { 

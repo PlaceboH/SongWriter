@@ -50,7 +50,7 @@ export class UserMussicWorkComponent implements OnInit {
   getImagesToMusicWorks(musicWorks: MusicWork[]): void {
     musicWorks.forEach(p => {
       this.imageService.getImageToMusicWork(p.id as number)
-        .subscribe( (data: any) => {
+        .subscribe(data => {
           p.image = data.imageBytes;
         });
     });
