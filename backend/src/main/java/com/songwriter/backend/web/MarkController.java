@@ -48,8 +48,7 @@ public class MarkController {
                 .get()
                 .stream()
                 .map((mark -> {
-                    MarkDTO markDTO = markFacade.markToMarkDTO(mark);
-                    return markDTO;
+                    return markFacade.markToMarkDTO(mark);
                 })).toList();
 
         return new ResponseEntity<>(MarkDTOList, HttpStatus.OK);

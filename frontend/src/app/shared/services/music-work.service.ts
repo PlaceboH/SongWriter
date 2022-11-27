@@ -22,14 +22,10 @@ export class MusicWorkService {
   }
 
   getMusicWorksForCurrentUser(): Observable<any> {
-    return this.http.get(POST_API + 'user/posts');
+    return this.http.get(POST_API + 'user/musicWorks');
   }
 
   deleteMusicWork(id: number): Observable<any> {
-    return this.http.post(POST_API + id + '/delete', null);
+    return this.http.post(POST_API + id + '/deleteWork', null);
   }
-
-//   likeMusicWork(id: number, username: string): Observable<any> {
-//     return this.http.post(POST_API + id + '/' + username + '/like', null);
-//   }
 }

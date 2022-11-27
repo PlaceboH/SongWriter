@@ -41,7 +41,7 @@ export class UserPostsComponent implements OnInit {
   }
 
   openEditDialog(): void {
-    const createPostDialog = new MatDialogConfig();;
+    const createPostDialog = new MatDialogConfig(); 
     this.dialog.open(CreatePostComponent, createPostDialog);
   }
 

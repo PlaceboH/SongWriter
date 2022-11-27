@@ -26,8 +26,13 @@ public class ImageUploadController {
 
         return ResponseEntity.ok(new MessageResponse("Image uploaded successfully"));
     }
+    @GetMapping("/profileImage")
+    public ResponseEntity<ImageModel> getImageForUser(Principal principal) {
+        ImageModel imageModel = imageUploadService.getImageToUser(principal);
 
-    @PostMapping("/{postId}/upload")
+        return new ResponseEntity<>(imageModel, HttpStatus.OK);
+    }
+    @PostMapping("/{postId}/postUpload")
     public ResponseEntity<MessageResponse> uploadImageToPost(@PathVariable("postId") String postId,
                                                              @RequestParam("imageFile") MultipartFile imageFile,
                                                              Principal principal) throws IOException {
@@ -36,18 +41,26 @@ public class ImageUploadController {
         return ResponseEntity.ok(new MessageResponse("Image uploaded successfully"));
     }
 
-    @GetMapping("/profileImage")
-    public ResponseEntity<ImageModel> getImageForUser(Principal principal) {
-        ImageModel imageModel = imageUploadService.getImageToUser(principal);
-
-        return new ResponseEntity<>(imageModel, HttpStatus.OK);
-    }
-
-    @GetMapping("/{postId}/image")
+    @GetMapping("/{postId}/postImage")
     public ResponseEntity<ImageModel> getImageForPost(@PathVariable("postId") String postId) {
         ImageModel imageModel = imageUploadService.getImageToPost(Long.parseLong(postId));
 
         return new ResponseEntity<>(imageModel, HttpStatus.OK);
     }
 
+    @PostMapping("/{musicWorkId}/musicWorkUpload")
+    public ResponseEntity<MessageResponse> uploadImageToMusicWork(@PathVariable("musicWorkId") String musicWorkId,
+                                                             @RequestParam("imageFile") MultipartFile imageFile,
+                                                             Principal principal) throws IOException {
+        imageUploadService.uploadImageToMusicWork(imageFile, principal, Long.parseLong(musicWorkId));
+
+        return ResponseEntity.ok(new MessageResponse("Image uploaded successfully"));
+    }
+
+    @GetMapping("/{musicWorkId}/musicWorkImage")
+    public ResponseEntity<ImageModel> getImageForMusicWork(@PathVariable("musicWorkId") String musicWorkId) {
+        ImageModel imageModel = imageUploadService.getImageToMusicWork(Long.parseLong(musicWorkId));
+
+        return new ResponseEntity<>(imageModel, HttpStatus.OK);
+    }
 }

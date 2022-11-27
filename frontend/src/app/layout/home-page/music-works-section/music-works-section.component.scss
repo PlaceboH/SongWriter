@@ -1,0 +1,76 @@
+@import "../../../shared/global.scss";
+
+.music-works-list {
+    padding: 10rem;
+}
+
+.music-work-image {
+    display: inline-block;
+    width: 45%;
+    height: 300px;
+    background-size: 50% 50%;
+  }
+
+.card-title {
+    display: block;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    height: 5em;
+    padding-bottom: 1em;
+}
+
+.card-general-info {
+    text-align: left;
+    margin-left: 5em;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.music-work-card {
+    justify-content: center;
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    height: 70vh;
+    display: inline-flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    text-align: center;
+    // &__post-image {
+    //     height: 3vh;
+    //     background-size: 100%;
+    //     border-radius: 3px;
+    // }
+    // &__post-title {
+    //     text-align: left;
+    //     padding-left: 2rem;
+    // }
+}
+.toolbar {
+    padding: 2em;
+    justify-content: center;
+}
+  
+.content {
+    padding-top: 5em;
+    padding-bottom: 5em;
+    background-color: $color-grey-light-2;
+}
+
+.editButton {
+    margin-left: 2em;
+}
+
+.profile-box.info-box .info-line {
+    margin-bottom: 24px;
+}
+.profile-box.info-box .info-line .title {
+    font-size: 14px;
+    font-weight: 600;
+    padding-bottom: 4px;
+}
+.profile-box.info-box .info-line .info {
+    font-size: 13px;
+}

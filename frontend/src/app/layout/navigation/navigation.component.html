@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <span routerLink="/home" style="cursor: pointer;margin-left: 20px;">{{ 'home.header.title' | translate }}</span>
+    <span routerLink="/home/profile" style="cursor: pointer;margin-left: 20px;">{{ 'home.header.title' | translate }}</span>
   
     <span class="spacer"></span>
   
@@ -14,7 +14,7 @@
       <mat-icon color="accent">account_box</mat-icon>
     </button>
     <mat-menu id="menu-item" #menu="matMenu">
-      <button mat-menu-item routerLink="/home">{{'home.header.profile' | translate}}</button>
+      <button mat-menu-item routerLink="/home/profile">{{'home.header.profile' | translate}}</button>
       <button (click)="logout()" mat-menu-item>
         {{ 'songwriter.logout' | translate }}
       </button>

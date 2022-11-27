@@ -1,4 +1,3 @@
-<app-navigation></app-navigation>
 <div id="profile" *ngIf="isUserDataLoaded">
   <div class="header"></div>
     <div  class="bg-text">
@@ -23,12 +22,10 @@
       <app-user-about-section [userData]="user"></app-user-about-section>
     </mat-tab>
     <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
-      MUSIC WORKS
+      <app-user-music-works-section></app-user-music-works-section>
     </mat-tab>
     <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
-      <app-user-posts-section>
-      </app-user-posts-section>
+      <app-user-posts-section></app-user-posts-section>
     </mat-tab>
   </mat-tab-group>
-
 </div>

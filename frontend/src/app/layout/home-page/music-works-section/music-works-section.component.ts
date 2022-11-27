@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import { CreateMusicWorkComponent } from './createMusicWork/create-musci-work.component';
+import { ImageUploadService } from 'src/app/shared/services/image.service';
+import { MarkService } from 'src/app/shared/services/mark.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MaterialModule } from 'src/app/material.module';
 import { MusicWork } from 'src/app/shared/models/MusicWork';
-import { Post } from 'src/app/shared/models/Post';
-import { CommentService } from 'src/app/shared/services/comment-service';
-import { ImageUploadService } from 'src/app/shared/services/image.service';
 import { MusicWorkService } from 'src/app/shared/services/music-work.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
     standalone: true,
     imports: [SharedModule, MaterialModule],
-    selector: 'app-user-music-work-section',
+    selector: 'app-user-music-works-section',
     templateUrl: './music-works-section.component.html',
     styleUrls: ['./music-works-section.component.scss']
 })
@@ -25,6 +26,7 @@ export class UserMussicWorkComponent implements OnInit {
   constructor(private musicWorkService: MusicWorkService,
               private imageService: ImageUploadService,
               private markService: MarkService,
+              private router: Router,
               private notificationService: NotificationService,
               private dialog: MatDialog) {
   }
@@ -34,20 +36,20 @@ export class UserMussicWorkComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.musicWorks = data;
-        // this.getImagesToPosts(this.musicWorks);
-        // this.getCommentsToPosts(this.musicWorks);
+        this.getImagesToMusicWorks(this.musicWorks);
+        this.getMarksToMusicWork(this.musicWorks);
         this.isUserMusicWorksLoaded = true;
       });
   }
 
   openEditDialog(): void {
-    const createPostDialog = new MatDialogConfig();;
-    // this.dialog.open(CreatePostComponent, createPostDialog);
+    const createMusicWorkDialog = new MatDialogConfig();
+    this.dialog.open(CreateMusicWorkComponent, createMusicWorkDialog);
   }
 
-  getImagesToPosts(posts: Post[]): void {
-    posts.forEach(p => {
-      this.imageService.getImageToPost(p.id as number)
+  getImagesToMusicWorks(musicWorks: MusicWork[]): void {
+    musicWorks.forEach(p => {
+      this.imageService.getImageToMusicWork(p.id as number)
         .subscribe( (data: any) => {
           p.image = data.imageBytes;
         });
@@ -55,23 +57,23 @@ export class UserMussicWorkComponent implements OnInit {
   }
 
 
-  getCommentsToPosts(posts: Post[]): void {
-    posts.forEach(p => {
-      this.commentService.getCommentsToPost(p.id as number)
+  getMarksToMusicWork(musicWorks: MusicWork[]): void {
+    musicWorks.forEach(m => {
+      this.markService.getMarksToMusicWork(m.id as number)
         .subscribe(data => {
-          p.comments = data;
+          m.marks = data;
         });
     });
   }
 
-  removePost(post: Post, index: number): void {
-    console.log(post);
-    const result = confirm('Do you really want to delete this post?');
+  removeMusicWork(musciWork: MusicWork, index: number): void {
+    console.log(musciWork);
+    const result = confirm('Do you really want to delete your work?');
     if (result) {
-      this.MusicWorkService.deletePost(post.id as number)
+      this.musicWorkService.deleteMusicWork(musciWork.id as number)
         .subscribe(() => {
-          this.posts.splice(index, 1);
-          this.notificationService.showSuccessSnackBar('Post deleted');
+          this.musicWorks.splice(index, 1);
+          this.notificationService.showSuccessSnackBar('MusciWork deleted');
         });
     }
   }
@@ -83,14 +85,9 @@ export class UserMussicWorkComponent implements OnInit {
     return 'data:image/jpeg;base64,' + img;
   }
 
-  deleteComment(commentId: number, postIndex: number, commentIndex: number): void {
-    const post = this.posts[postIndex];
 
-    this.commentService.deleteComment(commentId)
-      .subscribe(() => {
-        this.notificationService.showSuccessSnackBar('Comment removed');
-        post.comments.splice(commentIndex, 1);
-      });
+  goToManagePage(musicWorkId: number): void {
+    this.router.navigate(['home/managework', musicWorkId]);
   }
 
 }

@@ -23,11 +23,14 @@
     "home.tab.myPosts": "Posts",
     "home.tab.myWorks": "Music Works",
 
-    "home.tabs.myPosts.userPosts": "My Posts",
-    "home.tabs.myWorks.userMusicWorks": "My Music Works",
-
     "home.tabs.generalInformation": "General Information",
     "home.tabs.aboutMe": "About Me",
-    "home.tabs.editInfo": "Edit Info"
+    "home.tabs.editInfo": "Edit Info",
+
+    "home.tabs.myWorks.userMusicWorks": "My Music Works",
+    "home.tabs.myWorks.removeMusciWork": "Remove musicWork",
+    "home.tabs.myWorks.edit": "Edit Work",
+
+    "home.tabs.myPosts.userPosts": "My Posts"
 
 }
