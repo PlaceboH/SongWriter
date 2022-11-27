@@ -10,7 +10,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 @Component({
     standalone: true,
     imports: [SharedModule, MaterialModule],
-    selector: 'home-page',
+    selector: 'edit-user',
     templateUrl: './edit-user.component.html',
     styleUrls: ['./edit-user.component.scss']
   })

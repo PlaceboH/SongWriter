@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { NavigationPageComponent } from '../shared/custom-components/sw-navigation-page/sw-navigation-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -11,21 +11,12 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'auth-page',
   templateUrl: './auth-page.component.html',
 })
-export class AuthPageComponent implements OnInit {
+export class AuthPageComponent {
   navigationItems : {key: string, value: string }[] = 
         [ {value: 'login', key: 'Login'},
           {value: 'register', key: 'Register'},
           {value: '/', key: 'Welcome Page'},
         ];
-  isLogin = false;
 
-  constructor(private route: Router){}
-
-  ngOnInit(): void { }
-
-  ngOnChanges(): void {
-    this.isLogin = this.route.url.endsWith("login");
-
-    console.log(this.isLogin);
-  }
+  constructor(){}
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -106,6 +105,7 @@ public class MusicWorkService {
         LOG.info("Like musicWork {} by user: {}", musicWork.getTitle(), username);
         return musicWorkRepository.save(musicWork);
     }
+
 
     public void deleteMusicWork(Long musicWorkId, Principal principal) {
         MusicWork musicWork = getMusicWorkById(musicWorkId, principal);

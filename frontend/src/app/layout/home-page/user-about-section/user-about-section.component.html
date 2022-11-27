@@ -1,0 +1,28 @@
+<div *ngIf="userData">
+    <div class="profile-box info-box general">
+        <mat-toolbar class="toolbar">
+            <div>{{ 'home.tabs.generalInformation' | translate }}</div>
+            <button class="editButton" mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
+        </mat-toolbar>
+        <div class="content">
+            <div class="row">
+                <div class="info-line col">
+                    <div class="title">{{ 'home.tabs.aboutMe' | translate }}</div>
+                    <div class="info">{{userData.bio}}</div>
+                </div>
+                <div class="info-line col">
+                    <div class="title">Followers</div>
+                    <div class="info">{{ userData.userFollowers.length }}</div>
+                </div>
+                <div class="info-line col">
+                    <div class="title">Subscriptions</div>
+                    <div class="info">{{ userData.subscribedUsers.length }}</div>
+                </div>
+                <div class="info-line col">
+                    <div class="title">Skills</div>
+                    <div class="info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

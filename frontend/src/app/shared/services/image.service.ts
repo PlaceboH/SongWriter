@@ -18,18 +18,29 @@ export class ImageUploadService {
     return this.http.post(IMAGE_API + 'upload', uploadData);
   }
 
-  uploadImageToPost(file: File, postId: number): Observable<any> {
-    const uploadData = new FormData();
-    uploadData.append('imageFile', file);
-
-    return this.http.post(IMAGE_API + postId + '/upload', uploadData);
-  }
-
   getProfileImage(): Observable<any> {
     return this.http.get(IMAGE_API + 'profileImage');
   }
 
+  uploadImageToPost(file: File, postId: number): Observable<any> {
+    const uploadData = new FormData();
+    uploadData.append('imageFile', file);
+
+    return this.http.post(IMAGE_API + postId + '/postUpload', uploadData);
+  }
+
   getImageToPost(postId: number): any {
-    return this.http.get(IMAGE_API + postId + '/image');
+    return this.http.get(IMAGE_API + postId + '/postImage');
+  }
+
+  uploadImageToMusicWork(file: File, musicWorkId: number): Observable<any> {
+    const uploadData = new FormData();
+    uploadData.append('imageFile', file);
+
+    return this.http.post(IMAGE_API + musicWorkId + '/musicWorkUpload', uploadData);
+  }
+
+  getImageToMusicWork(musicWorkId: number): any {
+    return this.http.get(IMAGE_API + musicWorkId + '/musicWorkImage');
   }
 }

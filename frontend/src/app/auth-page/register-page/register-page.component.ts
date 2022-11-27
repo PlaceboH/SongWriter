@@ -27,7 +27,7 @@ import { TokenStorageService } from "../token-storage.service";
       private fb: FormBuilder,
     ) {
       if (this.tokenService.getUser().token) {
-        this.router.navigate(['home']);
+        this.router.navigate(['home/profile']);
       }
     }
 

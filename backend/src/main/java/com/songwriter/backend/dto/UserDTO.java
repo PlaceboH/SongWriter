@@ -15,7 +15,6 @@ public class UserDTO {
     private String lastname;
     private String username;
     private String bio;
-
     private List<User> subscribedUsers;
     private List<User> UserFollowers;
 }

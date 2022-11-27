@@ -1,0 +1,39 @@
+ <div>
+    <h2>Create Post</h2>
+    <form [formGroup]="postForm">
+  
+        <img class="post-image" [src]="previewImgURL || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'" alt="user image">
+  
+        <input type="file"
+                style="display: none"
+                #fileInput
+                (change)="onFileSelected($event)">
+
+        <button mat-button (click)="fileInput.click()">Pick File</button>
+
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput
+                formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Caption</mat-label>
+            <input matInput formControlName="caption">
+        </mat-form-field>
+
+        <div style="text-align: right">
+        <button
+            (click)="closeDialog()"
+            class="w-50"
+            mat-button
+            mat-dialog-close
+            disableRipple
+            >
+            {{ "songwriter.cancel" | translate }}
+        </button>
+        <button mat-flat-button color="primary" [disabled]="postForm.invalid" (click)="submit()">
+            Create Post
+        </button>
+        </div>
+    </form>
+</div>

@@ -1,7 +1,8 @@
 package com.songwriter.backend.services;
 
+import com.songwriter.backend.repository.ImageRepository;
 import com.songwriter.backend.dto.UserDTO;
-import com.songwriter.backend.entity.Post;
+import com.songwriter.backend.entity.ImageModel;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.entity.enums.ERole;
 import com.songwriter.backend.exceptions.UserExistException;
@@ -17,17 +18,20 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UserService {
     public static final Logger LOG = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
+    private final ImageRepository imageRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository, ImageRepository imageRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.imageRepository = imageRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -72,6 +76,13 @@ public class UserService {
         String username = principal.getName();
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found with username" + username));
+    }
+
+    public void deleteUser(Principal principal) {
+        User user = getUserByPrincipal(principal);
+        Optional<ImageModel> imageModel = imageRepository.findByUserId(user.getId());
+        userRepository.delete(user);
+        imageModel.ifPresent(imageRepository::delete);
     }
 
 }

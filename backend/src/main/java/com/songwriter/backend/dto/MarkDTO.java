@@ -10,9 +10,6 @@ public class MarkDTO {
     @NotEmpty
     private Integer stars;
     @NotEmpty
-    private Comment comment;
-    @NotEmpty
-    private Long musicWorkId;
-    @NotEmpty
+    private String message;
     private String username;
 }

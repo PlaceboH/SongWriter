@@ -25,7 +25,7 @@ import { TokenStorageService } from "../token-storage.service";
       private fb: FormBuilder,
     ) {       
       if (this.tokenService.getUser().token) {
-        this.router.navigate(['home']);
+        this.router.navigate(['home/profile']);
       }
     }
 
@@ -44,7 +44,7 @@ import { TokenStorageService } from "../token-storage.service";
         this.tokenService.saveUser(data);
 
         this.notificationService.showSuccessSnackBar('Successfully logged in');
-        this.router.navigate(['home']);
+        this.router.navigate(['home/profile']);
       }, error => {
         console.log("login error: ", error);
         this.notificationService.showErrorSnackBar("Login Error! Bad password or username");

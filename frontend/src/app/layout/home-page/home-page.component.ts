@@ -3,23 +3,22 @@ import { EditUserComponent } from "./edit-user/edit-user.component";
 import { ImageUploadService } from "src/app/shared/services/image.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { MaterialModule } from "src/app/material.module";
-import { NavigationComponent } from "../navigation/navigation.component";
 import { NotificationService } from "src/app/shared/services/notification.service";
-import { PostService } from "src/app/shared/services/post.service";
 import { SharedModule } from "src/app/shared/shared.module";
-import { TokenStorageService } from "src/app/auth-page/token-storage.service";
 import { User } from "src/app/shared/models/User";
+import { UserAboutComponent } from "./user-about-section/user-about-section.component";
 import { UserService } from "src/app/shared/services/user.service";
+import { UserPostsComponent } from "./user-posts-section/user-posts-section.component";
+import { UserMussicWorkComponent } from "./music-works-section/music-works-section.component";
 
 @Component({
     standalone: true,
-    imports: [SharedModule, MaterialModule, NavigationComponent],
     selector: 'home-page',
     templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.scss']
-  })
+    styleUrls: ['./home-page.component.scss'],
+    imports: [SharedModule, MaterialModule, UserAboutComponent, UserPostsComponent, UserMussicWorkComponent]
+})
   export class HomePageComponent implements OnInit {
-
 
     isUserDataLoaded = false;
     user!: User;
@@ -27,24 +26,24 @@ import { UserService } from "src/app/shared/services/user.service";
     userProfileImage!: File;
     previewImgURL: any;
   
-    constructor(private tokenService: TokenStorageService,
-                private postService: PostService,
+    constructor(
                 private dialog: MatDialog,
-                private notificationService: NotificationService,
                 private imageService: ImageUploadService,
-                private userService: UserService) {
-    }
+                private notificationService: NotificationService,
+                private userService: UserService
+                ) {}
   
     ngOnInit(): void {
       this.userService.getCurrentUser()
         .subscribe(data => {
           this.user = data;
+          console.log("USER DATA: ", this.user);
           this.isUserDataLoaded = true;
         });
+
   
       this.imageService.getProfileImage()
         .subscribe(data => {
-
           console.log("imege", data);
           this.userProfileImage = data.imageBytes;
         });

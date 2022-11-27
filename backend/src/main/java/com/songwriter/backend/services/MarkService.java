@@ -1,10 +1,12 @@
 package com.songwriter.backend.services;
 
+import com.songwriter.backend.repository.MarkRepository;
+import com.songwriter.backend.repository.MusicWorkRepository;
+import com.songwriter.backend.repository.UserRepository;
 import com.songwriter.backend.dto.MarkDTO;
 import com.songwriter.backend.entity.*;
 import com.songwriter.backend.exceptions.MusicWorkNotFoundException;
 import com.songwriter.backend.exceptions.PostNotFoundException;
-import com.songwriter.backend.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +40,10 @@ public class MarkService {
 
         MusicWork musicWork = musicWorkRepository.findById(id)
                 .orElseThrow(() -> new MusicWorkNotFoundException("Music Work cannot be found for user: " + user.getUsername()));
-        mark.setMusicWorkId(musicWork.getId());
+        mark.setMusicWork(musicWork);
+        mark.setUserId(user.getId());
         mark.setUsername(user.getUsername());
-        mark.setComment(markDTO.getComment());
+        mark.setMessage(markDTO.getMessage());
         mark.setStars(markDTO.getStars());
 
         LOG.info("Saving mark stars -> {}",  mark.getStars());
@@ -48,10 +51,10 @@ public class MarkService {
         return markRepository.save(mark);
     }
 
-    @Async
+   @Async
     public CompletableFuture<List<Mark>> getAllMarksForMusicWork(Long musicWorkId) {
         MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
-                .orElseThrow(() -> new PostNotFoundException("Cannot found any posts"));
+                .orElseThrow(() -> new PostNotFoundException("Cannot found any music works"));
 
         return CompletableFuture.completedFuture(markRepository.findAllByMusicWorkIdOrderByCreationDateDesc(musicWork.getId()));
     }

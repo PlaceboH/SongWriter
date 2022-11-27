@@ -16,14 +16,17 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String name;
     @Column(unique = true, updatable = false)
     private String username;
+
     @Column(nullable = false)
     private String lastname;
     @Column(unique = true, updatable = true)
     private String email;
+
     @Column(columnDefinition = "text")
     private String bio;
     @Column(length = 3000)
@@ -33,16 +36,17 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"))
     private Set<ERole> roles = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<MusicWork> musicWorks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<User> subscribedUsers = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<User> userFollower = new ArrayList<>();
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
@@ -75,17 +79,14 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;

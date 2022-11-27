@@ -19,7 +19,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 

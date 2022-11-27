@@ -11,7 +11,6 @@ public class PostDTO {
     @NotEmpty
     private String title;
     private String caption;
-    @NotEmpty
     private String username;
     private Integer likes;
     private Set<String> usersLiked;

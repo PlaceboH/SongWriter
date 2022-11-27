@@ -13,7 +13,7 @@ public class MusicWorkFacade {
         musicWorkDTO.setTitle(musicWork.getTitle());
         musicWorkDTO.setChords(musicWork.getChords());
         musicWorkDTO.setDescription(musicWork.getDescription());
-        musicWorkDTO.setLikes(musicWork.getLikes());
+        musicWorkDTO.setCaption(musicWork.getCaption());
         musicWorkDTO.setLyrics(musicWork.getLyrics());
 
         return musicWorkDTO;

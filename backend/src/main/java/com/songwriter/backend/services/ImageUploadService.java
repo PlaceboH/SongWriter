@@ -1,6 +1,7 @@
 package com.songwriter.backend.services;
 
 import com.songwriter.backend.entity.ImageModel;
+import com.songwriter.backend.entity.MusicWork;
 import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.exceptions.ImageNotFoundException;
@@ -51,6 +52,7 @@ public class ImageUploadService {
         imageModel.setUserId(user.getId());
         imageModel.setImageBytes(compressBytes(file.getBytes()));
         imageModel.setName(file.getOriginalFilename());
+
         return imageRepository.save(imageModel);
     }
 
@@ -70,6 +72,24 @@ public class ImageUploadService {
 
         return imageRepository.save(imageModel);
     }
+
+    public ImageModel uploadImageToMusicWork(MultipartFile file, Principal principal, Long musicWorkId) throws IOException {
+        User user = getUserByPrincipal(principal);
+        MusicWork musicWork = user.getMusicWorks()
+                .stream()
+                .filter(p -> p.getId().equals(musicWorkId))
+                .collect(toSinglePostCollector());
+
+        ImageModel imageModel = new ImageModel();
+        imageModel.setMusicWorkId(musicWork.getId());
+        imageModel.setImageBytes(file.getBytes());
+        imageModel.setImageBytes(compressBytes(file.getBytes()));
+        imageModel.setName(file.getOriginalFilename());
+        LOG.info("Uploading image to MusicWork {}", musicWork.getId());
+
+        return imageRepository.save(imageModel);
+    }
+
     public ImageModel getImageToUser(Principal principal) {
         User user = getUserByPrincipal(principal);
 
@@ -84,6 +104,17 @@ public class ImageUploadService {
     public ImageModel getImageToPost(Long postId) {
         ImageModel imageModel = imageRepository.findByPostId(postId)
                 .orElseThrow(() -> new ImageNotFoundException("Cannot find image to Post: " + postId));
+        if (!ObjectUtils.isEmpty(imageModel)) {
+            imageModel.setImageBytes(decompressBytes(imageModel.getImageBytes()));
+        }
+
+        return imageModel;
+    }
+
+
+    public ImageModel getImageToMusicWork(Long musicWorkId) {
+        ImageModel imageModel = imageRepository.findByMusicWorkId(musicWorkId)
+                .orElseThrow(() -> new ImageNotFoundException("Cannot find image to MusicWork: " + musicWorkId));
         if (!ObjectUtils.isEmpty(imageModel)) {
             imageModel.setImageBytes(decompressBytes(imageModel.getImageBytes()));
         }
@@ -144,5 +175,4 @@ public class ImageUploadService {
                 }
         );
     }
-
 }

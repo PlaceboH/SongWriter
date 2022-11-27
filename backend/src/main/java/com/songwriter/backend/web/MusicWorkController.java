@@ -83,15 +83,6 @@ public class MusicWorkController {
         return new ResponseEntity<>(musicWorkDTOList, HttpStatus.OK);
     }
 
-
-    @PostMapping("/{musicWorkId}/{username}/likeWork")
-    public ResponseEntity<MusicWorkDTO> likeMusicWork(@PathVariable("musicWorkId") String musicWorkId, @PathVariable("username") String username) {
-        MusicWork musicWork = musicWorkService.likeMusicWork(Long.parseLong(musicWorkId), username);
-        MusicWorkDTO musicWorkDTO = musicWorkFacade.musicWorkToMusicWorkDTO(musicWork);
-
-        return new ResponseEntity<>(musicWorkDTO, HttpStatus.OK);
-    }
-
     @PostMapping("/{musicWorkId}/deleteWork")
     public ResponseEntity<MessageResponse> deleteMusicWork(@PathVariable("musicWorkId") String musicWorkId, Principal principal) {
         musicWorkService.deleteMusicWork(Long.parseLong(musicWorkId), principal);

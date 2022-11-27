@@ -12,14 +12,22 @@ public class Mark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Integer stars;
-    @ManyToOne
-    @JoinColumn(name = "comment_id")
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Comment comment;
-    @JsonIgnore
-    private Long musicWorkId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private MusicWork musicWork;
+
     @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
+    private Long userId;
+
+    @Column(nullable = false)
+    private String message;
     @Column(updatable = false)
     private LocalDateTime creationDate;
     @PrePersist
