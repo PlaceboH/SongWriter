@@ -47,7 +47,7 @@ import { MusicWorkService } from "src/app/shared/services/music-work.service";
             ...this.musicWorkForm.value
         }).subscribe(data => {
             this.createdMusicWork = data;
-            console.log(data);
+            console.log("Create Music Work: ", data);
             if (this.createdMusicWork.id != null) {
                 this.imageUploadService.uploadImageToMusicWork(this.selectedFile, this.createdMusicWork.id)
                 .subscribe(() => {

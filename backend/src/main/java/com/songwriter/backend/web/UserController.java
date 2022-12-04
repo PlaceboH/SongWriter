@@ -47,6 +47,13 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
+    @GetMapping("/{username}/user")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable("username") String username) {
+        User user = userService.getUserByUsername(username);
+        UserDTO userDTO = userFacade.userToUserDTO(user);
+
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers() throws ExecutionException, InterruptedException {
@@ -68,7 +75,6 @@ public class UserController {
 
         return new ResponseEntity<>(userDTOUpdated, HttpStatus.OK);
     }
-
 
     @PostMapping("/{userId}/follow")
     public  void followUser(@PathVariable("userId") String userId, Principal principal) {

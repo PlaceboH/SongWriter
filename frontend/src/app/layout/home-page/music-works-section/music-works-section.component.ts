@@ -20,11 +20,11 @@ import { User } from 'src/app/shared/models/User';
     templateUrl: './music-works-section.component.html',
     styleUrls: ['./music-works-section.component.scss']
 })
-export class UserMussicWorkComponent implements OnInit {
+export class UserMusicWorkComponent implements OnInit {
 
   @Input() userData!: User;
   isUserMusicWorksLoaded = false;
-  musicWorks!: MusicWork [];
+  musicWorks!: MusicWork[];
 
   constructor(private musicWorkService: MusicWorkService,
               private imageService: ImageUploadService,
@@ -38,7 +38,7 @@ export class UserMussicWorkComponent implements OnInit {
   ngOnInit(): void {
     this.musicWorkService.getMusicWorksForUser(this.userData.id)
       .subscribe(data => {
-        console.log(data);
+        console.log("Music Works: ", data);
         this.musicWorks = data;
         this.getImagesToMusicWorks(this.musicWorks);
         this.getMarksToMusicWork(this.musicWorks);
@@ -55,7 +55,7 @@ export class UserMussicWorkComponent implements OnInit {
     musicWorks.forEach(p => {
       this.imageService.getImageToMusicWork(p.id as number)
         .subscribe(data => {
-          p.image = data.imageBytes;
+          p.image = data ? data.imageBytes : null;
         });
     });
   }
@@ -71,7 +71,6 @@ export class UserMussicWorkComponent implements OnInit {
   }
 
   removeMusicWork(musciWork: MusicWork, index: number): void {
-    console.log(musciWork);
     const result = confirm('Do you really want to delete your work?');
     if (result) {
       this.musicWorkService.deleteMusicWork(musciWork.id as number)

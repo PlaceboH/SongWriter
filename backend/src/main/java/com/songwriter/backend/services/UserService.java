@@ -115,13 +115,16 @@ public class UserService {
         LOG.info("Trying to get list of followers for user id: {}", userId);
 
         User user = userRepository.findById(userId).orElseThrow();
-        List<Subscription> subscriptions = subscriptionRepository.getSubscriptionsByFollower(user);
-        List<String> following = new ArrayList<>();
-        subscriptions.forEach(s -> following.add((s.getFollower().getUsername())));
+        List<Subscription> subscriptions = subscriptionRepository.getSubscriptionsByFollowing(user);
+        List<String> followers = new ArrayList<>();
+        subscriptions.forEach(s -> {
+            System.out.println(s.getFollower().getUsername());
+            followers.add((s.getFollower().getUsername()));
+        });
 
         LOG.info("Success! get list of followers users for user id: {}", userId);
 
-        return  following;
+        return  followers;
     }
 
     @Async
@@ -130,6 +133,11 @@ public class UserService {
     }
     public User getUserById(long userId) {
         return userRepository.findUserById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
     public User getCurrentUser(Principal principal) {

@@ -1,4 +1,5 @@
 import { Mark } from "./Mark";
+import { User } from "./User";
 
 export interface MusicWork {
     id?: number;
@@ -10,5 +11,6 @@ export interface MusicWork {
     notes?: File;
     image?: File;
     marks?: Mark[];
-    usernam?: string;
+    username?: string;
+    user?: User;
 }

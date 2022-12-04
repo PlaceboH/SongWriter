@@ -36,7 +36,7 @@ export class UserPostsComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPostForUser(this.userData.id)
       .subscribe(data => {
-        console.log(data);
+        console.log("Posts data: ", data);
         this.posts = data;
         this.getImagesToPosts(this.posts);
         this.getCommentsToPosts(this.posts);
@@ -69,7 +69,6 @@ export class UserPostsComponent implements OnInit {
   }
 
   removePost(post: Post, index: number): void {
-    console.log(post);
     const result = confirm('Do you really want to delete this post?');
     if (result) {
       this.postService.deletePost(post.id as number)

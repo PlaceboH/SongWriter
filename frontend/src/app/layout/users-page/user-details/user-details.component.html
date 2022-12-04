@@ -1,13 +1,17 @@
-<div id="profile" *ngIf="isUserDataLoaded">
+<div id="profile" *ngIf="isUserDataLoaded && followingUsers$ | async as followings; else loading">
     <div class="header"></div>
       <div  class="bg-text">
         <img  class="profile-image" [src]="formatImage(userProfileImage) || 'https://img.icons8.com/ios/512/no-camera.png'" alt="user image">
         <div>{{user.username}}</div>
         <h3 class="bg-text__name">{{user.firstname}} {{user.lastname}}</h3>
-        <div>
-          <button mat-button color="primary">Follow</button >
-          <button mat-button color="accent">Send Message</button >
+        <div *ngIf="!followings.includes(user.username); else unsubscribe">
+            <button mat-button color="primary" (click)="followUser(user.id)" ><mat-icon>person_add</mat-icon> Subscribe</button >
         </div>
+        <ng-template #unsubscribe>
+            <div>
+                <button mat-button color="accent" (click)="unfollowUser(user.id)" ><mat-icon>person_outline</mat-icon> Unsubscribe</button >
+            </div>
+        </ng-template>
       </div>
   
     <mat-tab-group mat-stretch-tabs>
@@ -21,4 +25,8 @@
         <app-user-posts-section [userData]="user"></app-user-posts-section>
       </mat-tab>
     </mat-tab-group>
-  </div>
+</div>
+
+<ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>

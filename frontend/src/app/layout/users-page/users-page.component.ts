@@ -23,7 +23,7 @@ export class UsersPageComponent implements OnInit {
   myUser: User;
   users: User[];
   followingUsers$ = new Observable<any>;
-  value: string;
+  searchValue: string;
   constructor(
       private imageService: ImageUploadService,
       private router: Router,

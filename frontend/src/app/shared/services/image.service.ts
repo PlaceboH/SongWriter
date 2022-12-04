@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 const IMAGE_API = 'http://localhost:8080/api/image/';
 
@@ -46,6 +46,9 @@ export class ImageUploadService {
   }
 
   getImageToMusicWork(musicWorkId: number): Observable<any> {
-    return this.http.get(IMAGE_API + musicWorkId + '/musicWorkImage');
+    return this.http.get(IMAGE_API + musicWorkId + '/musicWorkImage')
+      .pipe(catchError((err, caught) => {
+        return EMPTY;
+    }));
   }
 }
