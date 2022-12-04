@@ -61,8 +61,15 @@ public class PostService {
     }
 
     @Async
-    public CompletableFuture<List<Post>> getAllPostForUser(Principal principal) {
+    public CompletableFuture<List<Post>> getAllPostForCurrentUser(Principal principal) {
         User user = getUserByPrincipal(principal);
+
+        return CompletableFuture.completedFuture(postRepository.findAllByUserOrderByCreationDateDesc(user));
+    }
+
+    @Async
+    public CompletableFuture<List<Post>> getAllPostForUser(Long userId) {
+        User user = userRepository.getReferenceById(userId);
 
         return CompletableFuture.completedFuture(postRepository.findAllByUserOrderByCreationDateDesc(user));
     }

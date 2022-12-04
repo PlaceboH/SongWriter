@@ -7,6 +7,4 @@ export interface User {
     firstname: string;
     lastname: string;
     bio: string;
-    userFollowers: string[];
-    subscribedUsers: string[]; 
 }

@@ -63,7 +63,7 @@ public class MusicWorkController {
     }
 
     @GetMapping("/user/musicWorks")
-    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForUser(Principal principal) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForCurrentUser(Principal principal) throws ExecutionException, InterruptedException {
         List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllMusicWorkForUser(principal)
                 .get()
                 .stream()
@@ -73,9 +73,10 @@ public class MusicWorkController {
     }
 
 
-    @GetMapping("/{username}/musicWorks")
-    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForChosenUser(@PathVariable("username") String username, Principal principal) throws ExecutionException, InterruptedException {
-        List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllWorksForChosenUser(username, principal)
+
+    @GetMapping("/{userId}/musicWorks")
+    public ResponseEntity<List<MusicWorkDTO>> getAllWorksForChosenUser(@PathVariable("userId") String userId, Principal principal) throws ExecutionException, InterruptedException {
+        List<MusicWorkDTO> musicWorkDTOList = musicWorkService.getAllWorksForChosenUser(Long.parseLong(userId), principal)
                 .get()
                 .stream()
                 .map(musicWorkFacade::musicWorkToMusicWorkDTO).toList();

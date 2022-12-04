@@ -11,10 +11,6 @@
       <button mat-button *ngIf="selectedFile" (click)="onUpload()">{{ 'home.header.upload' | translate }}</button>
       <div>{{user.username}}</div>
       <h3 class="bg-text__name">{{user.firstname}} {{user.lastname}}</h3>
-      <!-- <div>
-        <button mat-button color="primary" >Follow</button >
-        <button mat-button color="accent" >Send Message</button >
-      </div> -->
     </div>
 
   <mat-tab-group mat-stretch-tabs>
@@ -22,10 +18,10 @@
       <app-user-about-section [userData]="user"></app-user-about-section>
     </mat-tab>
     <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
-      <app-user-music-works-section></app-user-music-works-section>
+      <app-user-music-works-section [userData]="user"></app-user-music-works-section>
     </mat-tab>
     <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
-      <app-user-posts-section></app-user-posts-section>
+      <app-user-posts-section [userData]="user"></app-user-posts-section>
     </mat-tab>
   </mat-tab-group>
 </div>

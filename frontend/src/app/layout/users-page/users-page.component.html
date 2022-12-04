@@ -1,16 +1,37 @@
-<div class="content">
-    <h2>Users </h2>
-    <mat-card class="user-card" *ngFor="let user of users; let i = index">
-        <img class="user-image" mat-card-image [src]="formatImage(user.image) || 'https://img.icons8.com/ios/512/no-camera.png' "  alt="user image">
+<div *ngIf="users  && followingUsers$ | async as followings; else loading" class="content">
+    
+    <div class="row">
+        <h2 class="col-1">Users</h2>
+        <mat-form-field class="col-4">
+            <mat-label>Search users by name</mat-label>
+            <input matInput placeholder="Favorite food" [(ngModel)]="value" />
+            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <mat-card class="user-card" *ngFor="let user of users | searchUser:value">
+        <img class="user-image" mat-card-image (click)="goToUserDetails(user.id)" [src]="formatImage(user.image) || 'https://img.icons8.com/ios/512/no-camera.png' "  alt="user image">
         <div class="card-general">
             <mat-card-title> {{ user.username }}</mat-card-title>
             <mat-card-content>
                 <span class="card-general__name">{{ user.firstname }}</span>
                 <span class="card-general__name">{{ user.lastname }}</span>
-                <div class="card-general__subscribe">
-                    <button mat-button color="primary" ><mat-icon>person_add</mat-icon> Subscribe</button >
+                <div class="card-general__subscribe" *ngIf="!followings.includes(user.username); else unsubscribe">
+                    <button mat-button color="primary" (click)="followUser(user.id)" ><mat-icon>person_add</mat-icon> Subscribe</button >
                 </div>
+                <ng-template #unsubscribe>
+                    <div class="card-general__subscribe">
+                        <button mat-button color="accent" (click)="unfollowUser(user.id)" ><mat-icon>person_outline</mat-icon> Unsubscribe</button >
+                    </div>
+                </ng-template>
+
             </mat-card-content>
         </div>
     </mat-card>
 </div>
+
+<ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>

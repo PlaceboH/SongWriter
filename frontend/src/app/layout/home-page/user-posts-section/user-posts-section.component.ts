@@ -1,11 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MaterialModule } from 'src/app/material.module';
 import { Post } from 'src/app/shared/models/Post';
+import { User } from 'src/app/shared/models/User';
 import { CommentService } from 'src/app/shared/services/comment-service';
 import { ImageUploadService } from 'src/app/shared/services/image.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import { UserService } from 'src/app/shared/services/user.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CreatePostComponent } from './create-post/create-post.component';
 
@@ -19,6 +21,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 })
 export class UserPostsComponent implements OnInit {
 
+  @Input() userData!: User;
   isUserPostsLoaded = false;
   posts!: Post [];
 
@@ -26,11 +29,12 @@ export class UserPostsComponent implements OnInit {
               private imageService: ImageUploadService,
               private commentService: CommentService,
               private notificationService: NotificationService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              public userService: UserService, ) {
   }
 
   ngOnInit(): void {
-    this.postService.getPostForCurrentUser()
+    this.postService.getPostForUser(this.userData.id)
       .subscribe(data => {
         console.log(data);
         this.posts = data;

@@ -1,8 +1,8 @@
-<div *ngIf="userData">
+<div *ngIf="userData && subscriptions$ | async as subs">
     <div class="profile-box info-box general">
         <mat-toolbar class="toolbar">
             <div>{{ 'home.tabs.generalInformation' | translate }}</div>
-            <button class="editButton" mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
+            <button *ngIf="userData.id === userService.currentUserId" class="editButton" mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
         </mat-toolbar>
         <div class="content">
             <div class="row">
@@ -10,13 +10,13 @@
                     <div class="title">{{ 'home.tabs.aboutMe' | translate }}</div>
                     <div class="info">{{userData.bio}}</div>
                 </div>
-                <div class="info-line col">
+                <div class="info-line col" (click)="coTamJest(subs)">
                     <div class="title">Followers</div>
-                    <div class="info">{{ userData.userFollowers.length }}</div>
+                    <div class="info">{{ subs?.length }}</div>
                 </div>
                 <div class="info-line col">
-                    <div class="title">Subscriptions</div>
-                    <div class="info">{{ userData.subscribedUsers.length }}</div>
+                    <div class="title">Following</div>
+                    <div class="info">{{ subs?.length }}</div>
                 </div>
                 <div class="info-line col">
                     <div class="title">Skills</div>
