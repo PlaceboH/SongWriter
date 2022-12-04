@@ -36,7 +36,7 @@ export class UserPostsComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPostForUser(this.userData.id)
       .subscribe(data => {
-        console.log(data);
+        console.log("Posts data: ", data);
         this.posts = data;
         this.getImagesToPosts(this.posts);
         this.getCommentsToPosts(this.posts);

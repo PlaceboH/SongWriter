@@ -2,8 +2,18 @@
 
 
 .content {
-    padding: 4rem;
+    padding: 2rem;
+    min-height: 70vh;
     background-color: $color-grey-light-2;
+}
+
+.serach-user {
+    margin-top: 6em;
+    margin-bottom: 2em;
+    &__input {
+        min-height: 3em;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    }
 }
 
 .user-image {
@@ -28,13 +38,21 @@
 
 
 .user-card {
+    background-image: linear-gradient(105deg, 
+                        rgba($color-white, .9) 0%,
+                        rgba($color-white, .9) 50%) ,
+                        url(/assets/img/user_note.png);
+    background-size: 100%;
+    background-position: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
     justify-content: left;
     position: relative;
     margin: 1rem;
     padding-left: 4em;
     padding-top: 2em;
-    width: 35vw;
-    height: 20vh;
+    width: 30vw;
+    height: 25vh;
     display: inline-flex;
     flex-direction:row;
     flex-wrap:wrap;

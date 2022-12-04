@@ -8,6 +8,8 @@ import { ImageUploadService } from 'src/app/shared/services/image.service';
 import { UserAboutComponent } from "../../home-page/user-about-section/user-about-section.component";
 import { UserMussicWorkComponent } from "../../home-page/music-works-section/music-works-section.component";
 import { UserPostsComponent } from "../../home-page/user-posts-section/user-posts-section.component";
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-user-details',
@@ -21,26 +23,24 @@ export class UserDetailsComponent implements OnInit {
   isUserDataLoaded = false;
   user!: User;
   userProfileImage!: File;
+  followingUsers$ = new Observable<any>;
 
   constructor(
-      private userService: UserService,
       private imageService: ImageUploadService,
+      private notificationService: NotificationService,
       private route: ActivatedRoute,
+      private userService: UserService,
       ) {}
 
   ngOnInit(): void {
     this.userService.getUserById(+this.route.snapshot.paramMap.get('id'))
       .subscribe(data => {
         this.user = data;
+        this.followingUsers$ = this.userService.getFollowingUsers(this.userService.currentUserId);
+        this.getImageToUser(this.user.id);
         this.isUserDataLoaded = true;
         console.log("USER DATA: ", this.user);
       });
-    this.getImageToUser();
-  }
-
-  private getImageToUser(): void {
-    this.imageService.getImageToUser(this.user.id as number)
-        .subscribe(data => this.userProfileImage = data.imageBytes);
   }
 
   formatImage(img: any): any {
@@ -50,4 +50,22 @@ export class UserDetailsComponent implements OnInit {
     return 'data:image/jpeg;base64,' + img;
   }
 
+  followUser(userId: number): void {
+    this.userService.followUser(userId).subscribe(data => {
+      this.notificationService.showSuccessSnackBar("Successfully following user");
+      this.followingUsers$ = this.userService.getFollowingUsers(this.userService.currentUserId);
+    });
+  }
+
+  unfollowUser(userId: number) {
+    this.userService.unfollowUser(userId).subscribe(data =>{
+      this.notificationService.showSuccessSnackBar("Successfully unfollowing user");
+      this.followingUsers$ = this.userService.getFollowingUsers(this.userService.currentUserId);
+    });
+  }
+
+  private getImageToUser(userId: number): void {
+    this.imageService.getImageToUser(userId)
+        .subscribe(data => this.userProfileImage = data ? data.imageBytes : null );
+  }
 }

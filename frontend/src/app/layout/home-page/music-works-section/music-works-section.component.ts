@@ -38,7 +38,7 @@ export class UserMussicWorkComponent implements OnInit {
   ngOnInit(): void {
     this.musicWorkService.getMusicWorksForUser(this.userData.id)
       .subscribe(data => {
-        console.log(data);
+        console.log("Music Works: ", data);
         this.musicWorks = data;
         this.getImagesToMusicWorks(this.musicWorks);
         this.getMarksToMusicWork(this.musicWorks);
@@ -55,7 +55,7 @@ export class UserMussicWorkComponent implements OnInit {
     musicWorks.forEach(p => {
       this.imageService.getImageToMusicWork(p.id as number)
         .subscribe(data => {
-          p.image = data.imageBytes;
+          p.image = data ? data.imageBytes : null;
         });
     });
   }

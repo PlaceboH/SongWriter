@@ -1,9 +1,12 @@
+@import "../../shared/global.scss";
 
-.navigation {
+.navigation-line {
   position: fixed;
+  height: 8vh;
   top: 0;
   left: 0;
   z-index: 1500;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
 } 
 
 .spacer {
