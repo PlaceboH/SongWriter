@@ -7,8 +7,10 @@ import { MusicWork } from 'src/app/shared/models/MusicWork';
 import { MusicWorkService } from 'src/app/shared/services/music-work.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/User';
 
 
 @Component({
@@ -20,6 +22,7 @@ import { Router } from '@angular/router';
 })
 export class UserMussicWorkComponent implements OnInit {
 
+  @Input() userData!: User;
   isUserMusicWorksLoaded = false;
   musicWorks!: MusicWork [];
 
@@ -28,11 +31,12 @@ export class UserMussicWorkComponent implements OnInit {
               private markService: MarkService,
               private router: Router,
               private notificationService: NotificationService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              public userService: UserService,) {
   }
 
   ngOnInit(): void {
-    this.musicWorkService.getMusicWorksForCurrentUser()
+    this.musicWorkService.getMusicWorksForUser(this.userData.id)
       .subscribe(data => {
         console.log(data);
         this.musicWorks = data;
@@ -50,7 +54,7 @@ export class UserMussicWorkComponent implements OnInit {
   getImagesToMusicWorks(musicWorks: MusicWork[]): void {
     musicWorks.forEach(p => {
       this.imageService.getImageToMusicWork(p.id as number)
-        .subscribe( (data: any) => {
+        .subscribe(data => {
           p.image = data.imageBytes;
         });
     });

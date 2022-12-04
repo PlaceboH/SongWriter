@@ -64,8 +64,18 @@ public class PostController {
     }
 
     @GetMapping("/user/posts")
-    public ResponseEntity<List<PostDTO>> getAllPostsForUser(Principal principal) throws ExecutionException, InterruptedException {
-        List<PostDTO> postDTOList = postService.getAllPostForUser(principal)
+    public ResponseEntity<List<PostDTO>> getAllPostsForCurrentUser(Principal principal) throws ExecutionException, InterruptedException {
+        List<PostDTO> postDTOList = postService.getAllPostForCurrentUser(principal)
+                .get()
+                .stream()
+                .map(postFacade::postToPostDTO).toList();
+
+        return new ResponseEntity<>(postDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}/posts")
+    public ResponseEntity<List<PostDTO>> getAllPostsForUser(@PathVariable("userId") String userId) throws ExecutionException, InterruptedException {
+        List<PostDTO> postDTOList = postService.getAllPostForUser(Long.parseLong(userId))
                 .get()
                 .stream()
                 .map(postFacade::postToPostDTO).toList();

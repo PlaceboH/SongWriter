@@ -75,16 +75,12 @@ public class MusicWorkService {
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
     @Async
-    public CompletableFuture<List<MusicWork>> getAllWorksForChosenUser(String username, Principal principal) {
-        User user = getUserByPrincipal(principal);
-
-        User subscribedUser = userRepository.findUserByUsername(username)
+    public CompletableFuture<List<MusicWork>> getAllWorksForChosenUser(Long userId, Principal principal) {
+        User user = userRepository.findUserById(userId)
                 .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
 
-        if ( !user.getSubscribedUsers().contains(subscribedUser) ) {
-            return null;
-        }
-
+//        User subscribedUser = userRepository.findUserById(userId)
+//                .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
 
@@ -103,6 +99,7 @@ public class MusicWorkService {
             musicWork.getLikedUsers().add(username);
         }
         LOG.info("Like musicWork {} by user: {}", musicWork.getTitle(), username);
+        
         return musicWorkRepository.save(musicWork);
     }
 

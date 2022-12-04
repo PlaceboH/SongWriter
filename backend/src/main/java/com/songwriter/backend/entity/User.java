@@ -1,6 +1,7 @@
 package com.songwriter.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.songwriter.backend.entity.enums.ERole;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -43,11 +44,12 @@ public class User implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
     private List<MusicWork> musicWorks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<User> subscribedUsers = new ArrayList<>();
+    @OneToMany(mappedBy="follower")
+    private List<Subscription> followers;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<User> userFollower = new ArrayList<>();
+    @OneToMany(mappedBy="following")
+    private List<Subscription> following;
+
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss")
     @Column(updatable = false)
     private LocalDateTime creationDate;

@@ -1,0 +1,42 @@
+@import "../../shared/global.scss";
+
+
+.content {
+    padding: 4rem;
+    background-color: $color-grey-light-2;
+}
+
+.user-image {
+    border-radius: 50%;
+    width: 8vw;
+    display: block;
+    justify-content: left;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.card-general {
+    position: relative;
+    margin-left: 5em;
+    &__name {
+        padding-right: 0.5em;
+    }
+    &__subscribe {
+        padding-top: 1rem;
+    }
+}
+
+
+.user-card {
+    justify-content: left;
+    position: relative;
+    margin: 1rem;
+    padding-left: 4em;
+    padding-top: 2em;
+    width: 35vw;
+    height: 20vh;
+    display: inline-flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    text-align: left;
+}

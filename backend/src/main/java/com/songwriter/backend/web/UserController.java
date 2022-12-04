@@ -1,6 +1,6 @@
 package com.songwriter.backend.web;
 
-import com.songwriter.backend.dto.PostDTO;
+import com.nimbusds.jose.util.Pair;
 import com.songwriter.backend.dto.UserDTO;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.facade.UserFacade;
@@ -67,6 +67,27 @@ public class UserController {
         UserDTO userDTOUpdated = userFacade.userToUserDTO(user);
 
         return new ResponseEntity<>(userDTOUpdated, HttpStatus.OK);
+    }
+
+
+    @PostMapping("/{userId}/follow")
+    public  void followUser(@PathVariable("userId") String userId, Principal principal) {
+        userService.follow(Long.parseLong(userId), principal);
+    }
+
+    @PostMapping("/{userId}/unfollow")
+    public void unfollowUser(@PathVariable("userId") String userId, Principal principal) {
+        userService.unfollow(Long.parseLong(userId), principal);
+    }
+
+    @GetMapping("/{userId}/following")
+    public  ResponseEntity<List<String>> getFollowingUsers(@PathVariable("userId") String userId) {
+        return new ResponseEntity<>(userService.getAllFollowingUsernamesForUser(Long.parseLong(userId)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{userId}/followers")
+    public  ResponseEntity<List<String>> getUserFollowers(@PathVariable("userId") String userId) {
+        return new ResponseEntity<>(userService.getAllFollowersUsernamesForUser(Long.parseLong(userId)), HttpStatus.OK);
     }
 
     @PostMapping("/delete")

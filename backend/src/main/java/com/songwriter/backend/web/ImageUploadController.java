@@ -32,6 +32,13 @@ public class ImageUploadController {
 
         return new ResponseEntity<>(imageModel, HttpStatus.OK);
     }
+
+    @GetMapping("/{userId}/userImage")
+    public ResponseEntity<ImageModel> getImageForUser(@PathVariable("userId") String userId) {
+        ImageModel imageModel = imageUploadService.getImageToUserById(Long.parseLong(userId));
+
+        return new ResponseEntity<>(imageModel, HttpStatus.OK);
+    }
     @PostMapping("/{postId}/postUpload")
     public ResponseEntity<MessageResponse> uploadImageToPost(@PathVariable("postId") String postId,
                                                              @RequestParam("imageFile") MultipartFile imageFile,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const IMAGE_API = 'http://localhost:8080/api/image/';
 
@@ -22,6 +23,10 @@ export class ImageUploadService {
     return this.http.get(IMAGE_API + 'profileImage');
   }
 
+  getImageToUser(userId: number): Observable<any> {
+    return this.http.get(IMAGE_API + userId + '/userImage');
+  }
+
   uploadImageToPost(file: File, postId: number): Observable<any> {
     const uploadData = new FormData();
     uploadData.append('imageFile', file);
@@ -40,7 +45,7 @@ export class ImageUploadService {
     return this.http.post(IMAGE_API + musicWorkId + '/musicWorkUpload', uploadData);
   }
 
-  getImageToMusicWork(musicWorkId: number): any {
+  getImageToMusicWork(musicWorkId: number): Observable<any> {
     return this.http.get(IMAGE_API + musicWorkId + '/musicWorkImage');
   }
 }

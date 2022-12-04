@@ -3,7 +3,11 @@
     <div class="profile-box info-box general">
         <mat-toolbar  class="toolbar">
             <div >{{ 'home.tabs.myWorks.userMusicWorks' | translate }}</div>
-            <button class="editButton" mat-flat-button color="primary" (click)="openEditDialog()" >Add Music work</button>
+            <button *ngIf="userData.id === userService.currentUserId"
+                    class="editButton" mat-flat-button color="primary"
+                    (click)="openEditDialog()">
+                    Add Music work
+            </button>
         </mat-toolbar>
 
         <div class="content music-works-list">
@@ -21,7 +25,6 @@
                         <p>{{ musicWork.description }}</p>
                     </mat-card-content>
                 </div>
-        
             
                 <div style="text-align: left">
                     <p *ngFor="let mark of musicWork.marks;
@@ -30,7 +33,7 @@
                                 {{ mark.username }}</span>: {{ mark.message }}
                     </p>
                 </div>
-                <mat-card-actions>
+                <mat-card-actions *ngIf="userData.id === userService.currentUserId">
                     <button color="warn" mat-button (click)="goToManagePage(musicWork.id)">
                         <mat-icon>edit</mat-icon>
                             {{ 'home.tabs.myWorks.edit' | translate }}

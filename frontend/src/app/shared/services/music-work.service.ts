@@ -25,6 +25,10 @@ export class MusicWorkService {
     return this.http.get(POST_API + 'user/musicWorks');
   }
 
+  getMusicWorksForUser(userId: number): Observable<any> {
+    return this.http.get(POST_API + userId + '/musicWorks');
+  }
+
   deleteMusicWork(id: number): Observable<any> {
     return this.http.post(POST_API + id + '/deleteWork', null);
   }
