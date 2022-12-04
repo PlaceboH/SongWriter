@@ -47,7 +47,7 @@ import { SharedModule } from "src/app/shared/shared.module";
             caption: this.postForm.value.caption,
         }).subscribe(data => {
             this.createdPost = data;
-            console.log(data);
+            console.log("Create Post: ", data);
             if (this.createdPost.id != null) {
                 this.imageUploadService.uploadImageToPost(this.selectedFile, this.createdPost.id)
                 .subscribe(() => {

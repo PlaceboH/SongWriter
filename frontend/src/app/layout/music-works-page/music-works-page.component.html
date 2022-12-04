@@ -1,0 +1,49 @@
+<div *ngIf="musicWorks; else loading">
+    
+    <div class="row search-music-work">
+        <h3 class="col-2">Music Works<mat-icon>search</mat-icon></h3>
+        <mat-form-field class="col-4">
+            <mat-label> Search music works </mat-label>
+            <input matInput placeholder="High Hopes" [(ngModel)]="searchValue" />
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="content music-works-list">
+        <mat-card class="music-work-card" *ngFor="let musicWork of musicWorks | searchMusicWork:searchValue">
+            <div class="card-title">
+                <mat-card-title> {{  musicWork.title }}</mat-card-title>
+            </div>
+
+            <ng-container *ngIf="musicWork.user; else loading">
+                <img class="music-work-image" mat-card-image [src]="formatImage(musicWork.image)" alt="musicWork image">
+                <div class="card-general-info">
+                    <mat-card-content>
+                        <p>{{ musicWork.caption }}</p>
+                    </mat-card-content>
+                    <mat-card-content>
+                        <p>{{ musicWork.description }}</p>
+                    </mat-card-content>
+                    <mat-card-content>
+                        <p>{{ 'Owner: ' + musicWork.username + ' | ' + musicWork?.user?.firstname + ' ' + musicWork?.user?.lastname }}</p> 
+                    </mat-card-content>
+                </div>
+            </ng-container>
+
+        
+            <div style="text-align: left">
+                <p *ngFor="let mark of musicWork.marks;
+                            let c = index"> <span style="font-weight: 500">
+                            <span>Marks: {{mark.stars}}</span>
+                            {{ mark.username }}</span>: {{ mark.message }}
+                </p>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>

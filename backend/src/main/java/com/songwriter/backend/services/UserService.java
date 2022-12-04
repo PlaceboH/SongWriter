@@ -135,6 +135,11 @@ public class UserService {
         return userRepository.findUserById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
     public User getCurrentUser(Principal principal) {
         return getUserByPrincipal(principal);
     }

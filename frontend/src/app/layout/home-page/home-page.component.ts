@@ -6,17 +6,17 @@ import { MaterialModule } from "src/app/material.module";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { User } from "src/app/shared/models/User";
-import { UserAboutComponent } from "./user-about-section/user-about-section.component";
 import { UserService } from "src/app/shared/services/user.service";
+import { UserAboutComponent } from "./user-about-section/user-about-section.component";
 import { UserPostsComponent } from "./user-posts-section/user-posts-section.component";
-import { UserMussicWorkComponent } from "./music-works-section/music-works-section.component";
+import { UserMusicWorkComponent } from "./music-works-section/music-works-section.component";
 
 @Component({
     standalone: true,
     selector: 'home-page',
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.scss'],
-    imports: [SharedModule, MaterialModule, UserAboutComponent, UserPostsComponent, UserMussicWorkComponent]
+    imports: [SharedModule, MaterialModule, UserAboutComponent, UserPostsComponent, UserMusicWorkComponent]
 })
   export class HomePageComponent implements OnInit {
 

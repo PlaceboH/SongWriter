@@ -1,0 +1,66 @@
+@import "../../shared/global.scss";
+
+
+.content {
+    padding: 2rem;
+    min-height: 70vh;
+    background-color: $color-grey-light-2;
+}
+
+.search-music-work {
+    margin-top: 6em;
+    margin-bottom: 2em;
+    &__input {
+        min-height: 3em;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    }
+}
+
+
+.music-works-list {
+    padding-top: 5rem;
+}
+
+.music-work-card {
+    background-image: linear-gradient(105deg, 
+                        rgba($color-white, .9) 0%,
+                        rgba($color-white, .9) 100%) ,
+                        url(/assets/img/user_note.png);
+    background-size: 70%;
+    background-position: right;
+    border-radius: 10px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    left: 17%;
+    margin-bottom: 5rem;
+    padding-left: 6em;
+    width: 65%;
+    height: 50vh;
+    display: inline-flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    text-align: center;
+}
+
+.music-work-image {
+    display: inline-block;
+    width: 40%;
+    height: 210px;
+    opacity: 0.7;
+    border-radius: 5px;
+}
+
+.card-title {
+    padding-top: 1rem;
+    display: block;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    height: 3em;
+}
+
+.card-general-info {
+    text-align: left;
+    margin-left: 5em;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}

@@ -1,18 +1,18 @@
 <div *ngIf="users  && followingUsers$ | async as followings; else loading" >
     
-    <div class="row serach-user">
+    <div class="row search-user">
         <h3 class="col-1">Users<mat-icon>search</mat-icon></h3>
         <mat-form-field class="col-4">
             <mat-label> Search users </mat-label>
-            <input matInput placeholder="Favorite food" [(ngModel)]="value" />
-            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <input matInput placeholder="User" [(ngModel)]="searchValue" />
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
     </div>
 
     <div class="content">
-        <mat-card class="user-card" *ngFor="let user of users | searchUser:value">
+        <mat-card class="user-card" *ngFor="let user of users | searchUser:searchValue">
             <img class="user-image" mat-card-image (click)="goToUserDetails(user.id)" [src]="formatImage(user.image) || 'https://img.icons8.com/ios/512/no-camera.png' "  alt="user image">
             <div class="card-general">
                 <mat-card-title> {{ user.username }}</mat-card-title>

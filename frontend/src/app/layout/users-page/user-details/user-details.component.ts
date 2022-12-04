@@ -6,17 +6,17 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { ImageUploadService } from 'src/app/shared/services/image.service';
 import { UserAboutComponent } from "../../home-page/user-about-section/user-about-section.component";
-import { UserMussicWorkComponent } from "../../home-page/music-works-section/music-works-section.component";
 import { UserPostsComponent } from "../../home-page/user-posts-section/user-posts-section.component";
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Observable } from 'rxjs';
+import { UserMusicWorkComponent } from '../../home-page/music-works-section/music-works-section.component';
 
 @Component({
     selector: 'app-user-details',
     standalone: true,
     templateUrl: './user-details.component.html',
     styleUrls: ['./user-details.component.scss'],
-    imports: [SharedModule, MaterialModule, UserAboutComponent, UserMussicWorkComponent, UserPostsComponent]
+    imports: [SharedModule, MaterialModule, UserAboutComponent, UserMusicWorkComponent, UserPostsComponent]
 })
 export class UserDetailsComponent implements OnInit {
 

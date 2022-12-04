@@ -69,7 +69,6 @@ export class UserPostsComponent implements OnInit {
   }
 
   removePost(post: Post, index: number): void {
-    console.log(post);
     const result = confirm('Do you really want to delete this post?');
     if (result) {
       this.postService.deletePost(post.id as number)
