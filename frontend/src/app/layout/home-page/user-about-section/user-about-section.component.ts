@@ -4,7 +4,7 @@ import { MaterialModule } from "src/app/material.module";
 import { SharedModule } from "src/app/shared/shared.module";
 import { User } from "src/app/shared/models/User";
 import { NavigationComponent } from "../../navigation/navigation.component";
-import { EditUserComponent } from "../edit-user/edit-user.component";
+import { EditUserComponent } from "./edit-user/edit-user.component";
 import { UserService } from "src/app/shared/services/user.service";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { Observable, zip } from "rxjs";

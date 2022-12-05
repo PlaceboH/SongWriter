@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { EditUserComponent } from "./edit-user/edit-user.component";
+import { EditUserComponent } from "./user-about-section/edit-user/edit-user.component";
 import { ImageUploadService } from "src/app/shared/services/image.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { MaterialModule } from "src/app/material.module";
