@@ -7,9 +7,11 @@
 
 
     "welcome.header.title": "Song Writer",
+    "welcome.header.subtitle": "share your work with others",
+    
     "home.header.users": "Users",
     "home.header.musicWorks": "Music Works",
-    "welcome.header.subtitle": "share your work with others",
+    "home.header.posts": "Posts",
 
 
     "home.header.title": "SongWriter",

@@ -8,6 +8,7 @@ import { EditUserComponent } from "../edit-user/edit-user.component";
 import { UserService } from "src/app/shared/services/user.service";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { Observable, zip } from "rxjs";
+import { UsersFollowPopupComponent } from "./users-follow-popup/users-follow-popup.component";
 
 @Component({
     standalone: true,
@@ -58,8 +59,13 @@ import { Observable, zip } from "rxjs";
       });
     }
 
-
-    coTamJest(subs : any) {
-      console.log(subs);
+    openUsersPopup(users: string[]) {
+      const dialogShowUsers = new MatDialogConfig();
+      dialogShowUsers.width = '400px';
+      dialogShowUsers.data = {
+          users: users
+      };
+      this.dialog.open(UsersFollowPopupComponent, dialogShowUsers);
     }
+    
   }

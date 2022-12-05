@@ -23,7 +23,7 @@ export class UserPostsComponent implements OnInit {
 
   @Input() userData!: User;
   isUserPostsLoaded = false;
-  posts!: Post [];
+  posts!: Post[];
 
   constructor(private postService: PostService,
               private imageService: ImageUploadService,

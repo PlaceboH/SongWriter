@@ -6,21 +6,18 @@
         </mat-toolbar>
         <div class="content">
             <div class="row">
-                <div class="info-line col">
+                <div class="info-line col-8">
                     <div class="title">{{ 'home.tabs.aboutMe' | translate }}</div>
-                    <div class="info">{{userData.bio}}</div>
-                </div>
-                <div class="info-line col" (click)="coTamJest(subs)">
-                    <div class="title">Followers</div>
-                    <div class="info">{{ subs[0]?.length }}</div>
+                    <div>{{userData.bio}}</div>
                 </div>
                 <div class="info-line col">
-                    <div class="title">Following</div>
-                    <div class="info">{{ subs[1]?.length }}</div>
+                    <div class="info">Followers {{ subs[0]?.length }}</div>
+                    <button *ngIf="subs[0]?.length" class="follow-button" mat-button color="primary" (click)="openUsersPopup(subs[0])">Show followers</button>
                 </div>
                 <div class="info-line col">
-                    <div class="title">Skills</div>
-                    <div class="info"></div>
+                    <div class="info">Following {{ subs[1]?.length }}</div>
+                    <button *ngIf="subs[1]?.length" class="follow-button" mat-button color="primary" (click)="openUsersPopup(subs[1])">Show following</button>
+
                 </div>
             </div>
         </div>

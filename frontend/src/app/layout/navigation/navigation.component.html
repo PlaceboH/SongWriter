@@ -3,6 +3,7 @@
     <span routerLink="/home/profile" class="main-item">{{ 'home.header.title' | translate }}</span>
     <span class="sub-item" routerLink="/home/users">{{ 'home.header.users' | translate }}</span>
     <span class="sub-item" routerLink="/home/music-works">{{ 'home.header.musicWorks' | translate }}</span>
+    <span class="sub-item" routerLink="/home/posts">{{ 'home.header.posts' | translate }}</span>
     <span class="spacer"></span>
   
     <button *ngIf="!isLoggedIn" matTooltip="Login" routerLink="login" mat-icon-button class="example-icon favorite-icon">

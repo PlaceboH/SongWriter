@@ -24,6 +24,16 @@
                     <mat-card-content>
                         <p>{{ musicWork.description }}</p>
                     </mat-card-content>
+                    <mat-card-actions *ngIf="userData.id === userService.currentUserId">
+                        <button color="warn" mat-button (click)="goToManagePage(musicWork.id)">
+                            <mat-icon>edit</mat-icon>
+                                {{ 'home.tabs.myWorks.edit' | translate }}
+                            </button>
+                        <button color="warn" mat-button (click)="removeMusicWork(musicWork, i)">
+                        <mat-icon color="warn">delete</mat-icon>
+                            {{ 'home.tabs.myWorks.removeMusciWork' | translate }}
+                        </button>
+                    </mat-card-actions>
                 </div>
             
                 <div style="text-align: left">
@@ -33,16 +43,6 @@
                                 {{ mark.username }}</span>: {{ mark.message }}
                     </p>
                 </div>
-                <mat-card-actions *ngIf="userData.id === userService.currentUserId">
-                    <button color="warn" mat-button (click)="goToManagePage(musicWork.id)">
-                        <mat-icon>edit</mat-icon>
-                            {{ 'home.tabs.myWorks.edit' | translate }}
-                        </button>
-                    <button color="warn" mat-button (click)="removeMusicWork(musicWork, i)">
-                    <mat-icon color="warn">delete</mat-icon>
-                        {{ 'home.tabs.myWorks.removeMusciWork' | translate }}
-                    </button>
-                </mat-card-actions>
             </mat-card>
         </div>
     </div>

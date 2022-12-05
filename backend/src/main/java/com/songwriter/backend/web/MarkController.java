@@ -33,6 +33,11 @@ public class MarkController {
 
     @PostMapping("/{id}/create")
     public ResponseEntity<Object> createMark(@Valid @RequestBody MarkDTO markDTO, @PathVariable("id") String id, BindingResult bindingResult, Principal principal) {
+
+        System.out.println("My tutka");
+        System.out.println(markDTO.getStars());
+        System.out.println(markDTO.getMessage());
+
         ResponseEntity<Object> errors = responseErrorValidator.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 

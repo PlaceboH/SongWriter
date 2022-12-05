@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Mark } from '../models/Mark';
 
 const MARK_API = 'http://localhost:8080/api/mark/';
 
@@ -13,10 +14,9 @@ export class MarkService {
     }
 
     addMarkToMusicWork(musicWorkId: number, message: string, stars: number): Observable<any> {
-
         return this.http.post(MARK_API + musicWorkId + '/create', {
             message: message,
-            stars: stars
+            stars: stars,
         });
     }
 

@@ -13,10 +13,8 @@ public class Mark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Integer stars;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Comment comment;
     @ManyToOne(fetch = FetchType.EAGER)
     private MusicWork musicWork;
 

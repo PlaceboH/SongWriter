@@ -34,7 +34,7 @@ export class ImageUploadService {
     return this.http.post(IMAGE_API + postId + '/postUpload', uploadData);
   }
 
-  getImageToPost(postId: number): any {
+  getImageToPost(postId: number): Observable<any> {
     return this.http.get(IMAGE_API + postId + '/postImage');
   }
 

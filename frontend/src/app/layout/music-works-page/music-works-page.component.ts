@@ -8,7 +8,9 @@ import { MarkService } from 'src/app/shared/services/mark.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import { SearchMusicWorkPipe } from 'src/app/shared/custom-pipes/search-item.pipe';
+import { SearchMusicWorkPipe } from 'src/app/shared/custom-pipes/search-music-work.pipe';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { GradeMusicWorkPopupComponent } from 'src/app/shared/layout-components/grade-music-work-popup/grade-music-work-popup.component';
 
 @Component({
   selector: 'app-music-works-page',
@@ -27,6 +29,7 @@ export class MusicWorksPageComponent implements OnInit {
             private imageService: ImageUploadService,
             private markService: MarkService,
             private userService: UserService,
+            private dialog: MatDialog,
             private router: Router,
             private notificationService: NotificationService,
     ) {}
@@ -70,6 +73,16 @@ export class MusicWorksPageComponent implements OnInit {
       });    
     });
   }
+
+  openGradeDialog(musicWork: MusicWork): void {
+    const dialogGradeMusicWork = new MatDialogConfig();
+    dialogGradeMusicWork.width = '400px';
+    dialogGradeMusicWork.data = {
+        musicWork: musicWork,
+    };
+    this.dialog.open(GradeMusicWorkPopupComponent, dialogGradeMusicWork);
+  }
+
 
   formatImage(img: any): any {
     if (img == null) {

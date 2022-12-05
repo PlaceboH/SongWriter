@@ -10,17 +10,18 @@
         <div class="content post-list">
             <h2>{{posts.length}} Posts</h2>
             <mat-card class="post-card" *ngFor="let post of posts; let i = index">
-                <mat-card-header style="text-align: left">
-                    <div mat-card-avatar class="post-card__post-image"></div>
-                    <mat-card-title class="post-card__post-title">{{post.title}}</mat-card-title>
-                </mat-card-header>
-                <img mat-card-image [src]="formatImage(post.image)" alt="post image">
-                <mat-card-content>
-                    <p>{{ post.caption }}</p>
-                </mat-card-content>
+                <div class="card-title">
+                    <mat-card-title> {{ post.title }}</mat-card-title>
+                </div>
+                <img class="post-image" mat-card-image [src]="formatImage(post.image)" alt="post image">
+                <div class="card-general-info">
+                    <mat-card-content>
+                        <p>{{ post.caption }}</p>
+                    </mat-card-content>
+                </div>
             
-                <div style="text-align: left">
-                    <p *ngFor="let comment of post.comments; let c = index"> <span style="font-weight: 500">{{ comment.username }}</span>: {{ comment.message }}
+                <div class="comments">
+                    <p *ngFor="let comment of post.comments; let c = index"> <span>{{ comment.username }}</span>: {{ comment.message }}
                     <button *ngIf="userData.id === userService.currentUserId"
                             color="accent" mat-button 
                             (click)="deleteComment(comment.id, i, c)">
@@ -36,7 +37,7 @@
                     </button>
                 </mat-card-actions>
             
-                <mat-card-subtitle align="start">Likes: {{post.likes}} <span *ngIf="post.likes > 0">by {{post.userLiked}}</span></mat-card-subtitle>
+                <mat-card-subtitle align="start">Likes: {{post.likes}} </mat-card-subtitle>
             </mat-card>
         </div>
     </div>

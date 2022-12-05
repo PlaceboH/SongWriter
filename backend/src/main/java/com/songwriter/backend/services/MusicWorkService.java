@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -39,7 +38,6 @@ public class MusicWorkService {
         musicWork.setChords(musicWorkDTO.getChords());
         musicWork.setLyrics(musicWorkDTO.getLyrics());
         musicWork.setDescription(musicWorkDTO.getDescription());
-        musicWork.setLikes(0);
 
         LOG.info("Saving musicWork for user: {}", user.getUsername());
 
@@ -82,25 +80,6 @@ public class MusicWorkService {
 //        User subscribedUser = userRepository.findUserById(userId)
 //                .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
-    }
-
-    public MusicWork likeMusicWork(Long musicWorkId, String username) {
-        MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
-                .orElseThrow(() -> new MusicWorkNotFoundException("MusicWork cannot be found"));
-
-        Optional<String> userLiked = musicWork.getLikedUsers()
-                .stream()
-                .filter(user -> user.equals(username)).findAny();
-        if (userLiked.isPresent()) {
-            musicWork.setLikes(musicWork.getLikes() - 1);
-            musicWork.getLikedUsers().remove(username);
-        } else {
-            musicWork.setLikes(musicWork.getLikes() + 1);
-            musicWork.getLikedUsers().add(username);
-        }
-        LOG.info("Like musicWork {} by user: {}", musicWork.getTitle(), username);
-        
-        return musicWorkRepository.save(musicWork);
     }
 
 

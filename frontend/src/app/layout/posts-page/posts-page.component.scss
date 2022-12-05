@@ -1,7 +1,24 @@
-@import "../../../shared/global.scss";
+@import "../../shared/global.scss";
 
-.post-list {
+
+.content {
     padding: 5rem;
+    min-height: 70vh;
+    background-color: $color-grey-light-2;
+}
+
+.search-post {
+    margin-top: 6em;
+    margin-bottom: 2em;
+    &__input {
+        min-height: 3em;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    }
+}
+
+
+.posts-list {
+    padding-top: 5rem;
 }
 
 .post-card {
@@ -40,35 +57,16 @@
     }
 }
 
-.toolbar {
-    padding: 2em;
-    justify-content: center;
-}
-  
-.content {
-    padding-top: 5em;
-    padding-bottom: 5em;
-    background-color: $color-grey-light-2;
-}
-
 .comments {
     text-align: left;
     width: 80%;
     display: block;
 }
 
-.editButton {
-    margin-left: 2em;
-}
-
-.profile-box.info-box .info-line {
-    margin-bottom: 24px;
-}
-.profile-box.info-box .info-line .title {
-    font-size: 14px;
-    font-weight: 600;
-    padding-bottom: 4px;
-}
-.profile-box.info-box .info-line .info {
-    font-size: 13px;
+.is-liked {
+    color: darkred;
+  }
+  
+.not-liked {
+    color: grey;
 }
