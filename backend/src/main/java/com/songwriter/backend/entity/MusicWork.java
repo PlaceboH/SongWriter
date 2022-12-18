@@ -4,9 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -33,17 +31,11 @@ public class MusicWork {
     private byte[] notes;
 
     private String caption;
-
-    private Integer likes;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "musicWork", orphanRemoval = true)
     private Set<Mark> marks = new HashSet<>();
-
-    @Column
-    @ElementCollection(targetClass = String.class)
-    private Set<String> likedUsers = new HashSet<>();
 
     @Column(updatable = false)
     private LocalDateTime creationDate;

@@ -3,6 +3,7 @@
 
 .content {
     padding: 2rem;
+    text-align: center;
     min-height: 70vh;
     background-color: $color-grey-light-2;
 }
@@ -51,7 +52,7 @@
     margin: 1rem;
     padding-left: 4em;
     padding-top: 2em;
-    width: 30vw;
+    width: 28vw;
     height: 25vh;
     display: inline-flex;
     flex-direction:row;

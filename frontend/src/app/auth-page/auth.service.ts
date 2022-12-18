@@ -1,7 +1,6 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export type UserLogInData = {
     username: string;
@@ -20,19 +19,18 @@ export type UserRegisterData = {
 const AUTH_API = 'http://localhost:8080/api/auth/';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class AuthService { 
-
+export class AuthService {
     constructor(private http: HttpClient) {}
 
     public login(user: UserLogInData): Observable<any> {
-        console.log("USER AUTH LOGIN DATA: ", user);
+        console.log('USER AUTH LOGIN DATA: ', user);
         return this.http.post(AUTH_API + 'signin', { ...user });
     }
 
     public register(user: UserRegisterData): Observable<any> {
-        console.log("USER AUTH REGISTER DATA: ", user);
+        console.log('USER AUTH REGISTER DATA: ', user);
         return this.http.post(AUTH_API + 'signup', { ...user });
     }
 }

@@ -1,13 +1,13 @@
 package com.songwriter.backend.dto;
 
-import com.songwriter.backend.entity.Comment;
 import lombok.Data;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class MarkDTO {
     private Long id;
-    @NotEmpty
+    @NotNull
     private Integer stars;
     @NotEmpty
     private String message;

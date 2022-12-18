@@ -1,5 +1,5 @@
-import { Mark } from "./Mark";
-import { User } from "./User";
+import { Mark } from './Mark';
+import { User } from './User';
 
 export interface MusicWork {
     id?: number;

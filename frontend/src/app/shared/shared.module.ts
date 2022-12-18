@@ -1,13 +1,11 @@
-import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-    imports: [
-        TranslateModule,
-    ],
+    imports: [TranslateModule],
     exports: [
         CommonModule,
         FormsModule,
@@ -15,7 +13,5 @@ import { TranslateModule } from '@ngx-translate/core';
         RouterModule,
         TranslateModule,
     ],
-  })
-  
-  export class SharedModule {
-  }
+})
+export class SharedModule {}

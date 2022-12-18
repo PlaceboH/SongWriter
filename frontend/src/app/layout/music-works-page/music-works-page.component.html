@@ -26,10 +26,14 @@
                     <mat-card-content>
                         <p>{{ musicWork.description }}</p>
                     </mat-card-content>
-                    <mat-card-content>
-                        <p>{{ 'Owner: ' + musicWork.username + ' | ' + musicWork?.user?.firstname + ' ' + musicWork?.user?.lastname }}</p> 
-                    </mat-card-content>
+                    <div class="row">
+                        <mat-card-content class="col-auto">
+                            <p>{{ 'Owner: ' + musicWork.username + ' | ' + musicWork?.user?.firstname + ' ' + musicWork?.user?.lastname }}</p> 
+                        </mat-card-content>
+                        <button class="col" mat-button color="accent" (click)="openGradeDialog(musicWork)"><mat-icon>grade</mat-icon>Leave Your grade</button >
+                    </div>
                 </div>
+
             </ng-container>
 
         

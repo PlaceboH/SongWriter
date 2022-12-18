@@ -1,53 +1,54 @@
 @import "../../../shared/global.scss";
 
 .music-works-list {
-    padding: 10rem;
+    padding: 5rem;
 }
 
 .music-work-image {
     display: inline-block;
-    width: 45%;
-    height: 300px;
-    background-size: 50% 50%;
-  }
+    width: 40%;
+    height: 210px;
+    opacity: 0.7;
+    border-radius: 5px;
+}
 
 .card-title {
+    padding-top: 1rem;
     display: block;
     position: relative;
     justify-content: center;
     width: 100%;
-    height: 5em;
-    padding-bottom: 1em;
+    height: 3em;
 }
+
 
 .card-general-info {
     text-align: left;
-    margin-left: 5em;
-    padding-top: 5em;
-    padding-bottom: 5em;
+    width: 50%;
+    margin-left: 3em;
+    padding-top: 1em;
 }
 
 .music-work-card {
-    justify-content: center;
-    position: relative;
-    margin-bottom: 1.5rem;
-    padding: 2.5rem;
-    width: 100%;
-    height: 70vh;
+    background-image: linear-gradient(105deg, 
+                        rgba($color-white, .9) 0%,
+                        rgba($color-white, .9) 100%) ,
+                        url(/assets/img/user_note.png);
+    background-size: 70%;
+    background-position: right;
+    border-radius: 10px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    left: 17%;
+    margin-bottom: 5rem;
+    padding-left: 4em;
+    width: 65%;
+    height: 50vh;
     display: inline-flex;
     flex-direction:row;
     flex-wrap:wrap;
     text-align: center;
-    // &__post-image {
-    //     height: 3vh;
-    //     background-size: 100%;
-    //     border-radius: 3px;
-    // }
-    // &__post-title {
-    //     text-align: left;
-    //     padding-left: 2rem;
-    // }
 }
+
 .toolbar {
     padding: 2em;
     justify-content: center;

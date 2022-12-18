@@ -1,27 +1,43 @@
 <div id="profile" *ngIf="isUserDataLoaded">
-  <div class="header"></div>
-    <div  class="bg-text">
-      <img  class="profile-image" [src]="previewImgURL || formatImage(userProfileImage) || 'https://www.missingdogsuk.co.uk/wp-content/plugins/wp-job-manager-resumes/assets/images/candidate.png'" alt="user image">
-      <input type="file"
-              style="display: none"
-              #fileInput
-              (change)="onFileSelected($event)">
+    <div class="header"></div>
+    <div class="bg-text">
+        <img
+            class="profile-image"
+            [src]="
+                previewImgURL ||
+                formatImage(userProfileImage) ||
+                'https://img.icons8.com/ios/512/no-camera.png'
+            "
+            alt="user image"
+        />
+        <input
+            type="file"
+            style="display: none"
+            #fileInput
+            (change)="onFileSelected($event)"
+        />
 
-      <button mat-button (click)="fileInput.click()">{{ 'home.header.pickFile' | translate }}</button>
-      <button mat-button *ngIf="selectedFile" (click)="onUpload()">{{ 'home.header.upload' | translate }}</button>
-      <div>{{user.username}}</div>
-      <h3 class="bg-text__name">{{user.firstname}} {{user.lastname}}</h3>
+        <button mat-button (click)="fileInput.click()">
+            {{ "home.header.pickFile" | translate }}
+        </button>
+        <button mat-button *ngIf="selectedFile" (click)="onUpload()">
+            {{ "home.header.upload" | translate }}
+        </button>
+        <div>{{ user.username }}</div>
+        <h3 class="bg-text__name">{{ user.firstname }} {{ user.lastname }}</h3>
     </div>
 
-  <mat-tab-group mat-stretch-tabs>
-    <mat-tab label="{{ 'home.tab.about' | translate }}">
-      <app-user-about-section [userData]="user"></app-user-about-section>
-    </mat-tab>
-    <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
-      <app-user-music-works-section [userData]="user"></app-user-music-works-section>
-    </mat-tab>
-    <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
-      <app-user-posts-section [userData]="user"></app-user-posts-section>
-    </mat-tab>
-  </mat-tab-group>
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="{{ 'home.tab.about' | translate }}">
+            <app-user-about-section [userData]="user"></app-user-about-section>
+        </mat-tab>
+        <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
+            <app-user-music-works-section
+                [userData]="user"
+            ></app-user-music-works-section>
+        </mat-tab>
+        <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
+            <app-user-posts-section [userData]="user"></app-user-posts-section>
+        </mat-tab>
+    </mat-tab-group>
 </div>

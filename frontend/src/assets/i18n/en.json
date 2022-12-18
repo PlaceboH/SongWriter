@@ -4,12 +4,51 @@
     "songwriter.update": "Update",
     "songwriter.cancel": "Cancel",
     "songwriter.register": "Register",
+    "songwriter.required": "required",
 
 
     "welcome.header.title": "Song Writer",
+    "welcome.header.subtitle": "share your work with others",
+    
+    "welcome.infoSection.title": "For who this Aplication",
+    "welcome.infoSection.subtitleOne": "Lorem ipsum dolor sit amet",
+    "welcome.infoSection.subtitleTwo": "Asperiores nulla deserunt voluptatum nam",
+    "welcome.infoSection.sectionOne": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur libero repellat quis consequatur ducimus quam nisi exercitationem omnis earum qui.  Donec tincidunt aliquam felis ut consectetur. Maecenas nulla sapien, blandit vel sollicitudin non, suscipit in purus.",
+    "welcome.infoSection.sectionTwo": "Vivamus est tellus, tempor at felis ut, sodales fermentum neque. Nullam quis arcu et mi tempor pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean imperdiet enim vel nisi pharetra, ac ornare sapien porttitor. Phasellus placerat risus eget dui auctor, ac tristique risus tincidunt. Donec et nisi mi. Vivamus sit amet elementum ligula, a luctus eros.",
+    "welcome.infoSection.letsStart": "Let's start",
+    
+    "welcome.infoSection.features.uploadAndShareTitle": "Upload and Share",
+    "welcome.infoSection.features.uploadAndShareDesc": "Upload music work to workdash. And also You can share your example work to get more subscribers",
+    "welcome.infoSection.features.editTitle": "Edit work",
+    "welcome.infoSection.features.editDesc": "You can edit whatever you need",
+    "welcome.infoSection.features.subscribeTitle": "Subscribe users",
+    "welcome.infoSection.features.subscribeDesc": "If You like works other people you can subscribe to user account of this person",
+    "welcome.infoSection.features.blogTitle": "Start blog",
+    "welcome.infoSection.features.blogDesc": "You can also create posts and start blog for your subscribers and also watch post of subscribed users",
+    "welcome.infoSection.features.evaluateTitle": "Evaluate the work",
+    "welcome.infoSection.features.evaluateDesc": "Evaluate the work subscribed users",
+
+    "sw.rating.required": "Star count is required and cannot be zero",
+    "sw.rating.youRated": "Your rated",
+
+
+
+
+
+
+    "welcome.navigation.login": "Login",
+    "welcome.navigation.createAccount" : "Create account",
+    "welcome.navigation.aboutSW" : "About SongWriter",
+    "welcome.navigation.aboutMe" : "About me",
+    "welcome.navigation.git" : "Link to Github",
+    "welcome.navigation.support" : "Support",
+
+
+
+
     "home.header.users": "Users",
     "home.header.musicWorks": "Music Works",
-    "welcome.header.subtitle": "share your work with others",
+    "home.header.posts": "Posts",
 
 
     "home.header.title": "SongWriter",

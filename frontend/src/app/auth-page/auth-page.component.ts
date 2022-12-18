@@ -6,17 +6,23 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, NavigationPageComponent, LoginPageComponent, RegisterPageComponent],
-  selector: 'auth-page',
-  templateUrl: './auth-page.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterModule,
+        NavigationPageComponent,
+        LoginPageComponent,
+        RegisterPageComponent,
+    ],
+    selector: 'auth-page',
+    templateUrl: './auth-page.component.html',
 })
 export class AuthPageComponent {
-  navigationItems : {key: string, value: string }[] = 
-        [ {value: 'login', key: 'Login'},
-          {value: 'register', key: 'Register'},
-          {value: '/', key: 'Welcome Page'},
-        ];
+    navigationItems: { key: string; value: string }[] = [
+        { value: 'login', key: 'Login' },
+        { value: 'register', key: 'Register' },
+        { value: '/', key: 'Welcome Page' },
+    ];
 
-  constructor(){}
+    constructor() {}
 }

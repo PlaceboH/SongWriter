@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MaterialModule } from 'src/app/material.module';
 import { Post } from 'src/app/shared/models/Post';
@@ -11,89 +11,89 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CreatePostComponent } from './create-post/create-post.component';
 
-
 @Component({
     standalone: true,
     imports: [SharedModule, MaterialModule],
     selector: 'app-user-posts-section',
     templateUrl: './user-posts-section.component.html',
-    styleUrls: ['./user-posts-section.component.scss']
+    styleUrls: ['./user-posts-section.component.scss'],
 })
 export class UserPostsComponent implements OnInit {
+    @Input() userData!: User;
+    isUserPostsLoaded = false;
+    posts!: Post[];
 
-  @Input() userData!: User;
-  isUserPostsLoaded = false;
-  posts!: Post [];
+    constructor(
+        private postService: PostService,
+        private imageService: ImageUploadService,
+        private commentService: CommentService,
+        private notificationService: NotificationService,
+        private dialog: MatDialog,
+        public userService: UserService
+    ) {}
 
-  constructor(private postService: PostService,
-              private imageService: ImageUploadService,
-              private commentService: CommentService,
-              private notificationService: NotificationService,
-              private dialog: MatDialog,
-              public userService: UserService, ) {
-  }
-
-  ngOnInit(): void {
-    this.postService.getPostForUser(this.userData.id)
-      .subscribe(data => {
-        console.log("Posts data: ", data);
-        this.posts = data;
-        this.getImagesToPosts(this.posts);
-        this.getCommentsToPosts(this.posts);
-        this.isUserPostsLoaded = true;
-      });
-  }
-
-  openEditDialog(): void {
-    const createPostDialog = new MatDialogConfig(); 
-    this.dialog.open(CreatePostComponent, createPostDialog);
-  }
-
-  getImagesToPosts(posts: Post[]): void {
-    posts.forEach(p => {
-      this.imageService.getImageToPost(p.id as number)
-        .subscribe( (data: any) => {
-          p.image = data.imageBytes;
-        });
-    });
-  }
-
-
-  getCommentsToPosts(posts: Post[]): void {
-    posts.forEach(p => {
-      this.commentService.getCommentsToPost(p.id as number)
-        .subscribe(data => {
-          p.comments = data;
-        });
-    });
-  }
-
-  removePost(post: Post, index: number): void {
-    const result = confirm('Do you really want to delete this post?');
-    if (result) {
-      this.postService.deletePost(post.id as number)
-        .subscribe(() => {
-          this.posts.splice(index, 1);
-          this.notificationService.showSuccessSnackBar('Post deleted');
+    ngOnInit(): void {
+        this.postService.getPostForUser(this.userData.id).subscribe((data) => {
+            console.log('Posts data: ', data);
+            this.posts = data;
+            this.getImagesToPosts(this.posts);
+            this.getCommentsToPosts(this.posts);
+            this.isUserPostsLoaded = true;
         });
     }
-  }
 
-  formatImage(img: any): any {
-    if (img == null) {
-      return null;
+    openEditDialog(): void {
+        const createPostDialog = new MatDialogConfig();
+        this.dialog.open(CreatePostComponent, createPostDialog);
     }
-    return 'data:image/jpeg;base64,' + img;
-  }
 
-  deleteComment(commentId: number, postIndex: number, commentIndex: number): void {
-    const post = this.posts[postIndex];
+    getImagesToPosts(posts: Post[]): void {
+        posts.forEach((p) => {
+            this.imageService
+                .getImageToPost(p.id as number)
+                .subscribe((data: any) => {
+                    p.image = data.imageBytes;
+                });
+        });
+    }
 
-    this.commentService.deleteComment(commentId)
-      .subscribe(() => {
-        this.notificationService.showSuccessSnackBar('Comment removed');
-        post.comments.splice(commentIndex, 1);
-      });
-  }
+    getCommentsToPosts(posts: Post[]): void {
+        posts.forEach((p) => {
+            this.commentService
+                .getCommentsToPost(p.id as number)
+                .subscribe((data) => {
+                    p.comments = data;
+                });
+        });
+    }
 
+    removePost(post: Post, index: number): void {
+        const result = confirm('Do you really want to delete this post?');
+        if (result) {
+            this.postService.deletePost(post.id as number).subscribe(() => {
+                this.posts.splice(index, 1);
+                this.notificationService.showSuccessSnackBar('Post deleted');
+            });
+        }
+    }
+
+    formatImage(img: any): any {
+        if (img == null) {
+            return null;
+        }
+        return 'data:image/jpeg;base64,' + img;
+    }
+
+    deleteComment(
+        commentId: number,
+        postIndex: number,
+        commentIndex: number
+    ): void {
+        const post = this.posts[postIndex];
+
+        this.commentService.deleteComment(commentId).subscribe(() => {
+            this.notificationService.showSuccessSnackBar('Comment removed');
+            post.comments.splice(commentIndex, 1);
+        });
+    }
 }
