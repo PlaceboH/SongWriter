@@ -1,18 +1,20 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { User } from "../models/User";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../models/User';
 
 const USER_API = 'http://localhost:8080/api/user/';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserService {
     currentUserId: number;
 
     constructor(private http: HttpClient) {
-        this.getCurrentUser().subscribe(user => this.currentUserId = user.id);
+        this.getCurrentUser().subscribe(
+            (user) => (this.currentUserId = user.id)
+        );
     }
 
     getUserById(id: number): Observable<any> {
@@ -50,5 +52,4 @@ export class UserService {
     getUserFollowers(userId: number): Observable<any> {
         return this.http.get(USER_API + userId + '/followers');
     }
-    
- }
+}

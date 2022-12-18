@@ -1,6 +1,6 @@
 export enum SubscriptionType {
     Open,
-    Close
+    Close,
 }
 
 export enum AccountGoalTags {

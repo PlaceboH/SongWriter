@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     standalone: true,
@@ -6,11 +6,11 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
     templateUrl: './sw-popup.component.html',
     styleUrls: ['./sw-popup.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-  })
-  export class SwPopupComponent {
+})
+export class SwPopupComponent {
     @Input() title!: string;
     @Input() subtitle!: string;
     @Input() description!: string;
 
     constructor() {}
-  }
+}

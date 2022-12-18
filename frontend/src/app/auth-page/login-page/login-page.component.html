@@ -4,28 +4,37 @@
             <div class="book__form">
                 <form action="#" class="form" [formGroup]="loginForm">
                     <div class="u-margin-bottom-medium">
-                        <h2 class="heading-secondary">
-                            LogIn
-                        </h2>
+                        <h2 class="heading-secondary">LogIn</h2>
                     </div>
                     <div>
                         <mat-form-field class="input-field">
                             <mat-label>Email</mat-label>
-                            <input matInput required formControlName="username">
+                            <input
+                                matInput
+                                required
+                                formControlName="username"
+                            />
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="input-field">
                             <mat-label>Password</mat-label>
-                            <input matInput required type="password" formControlName="password">
+                            <input
+                                matInput
+                                required
+                                type="password"
+                                formControlName="password"
+                            />
                         </mat-form-field>
                     </div>
-        
+
                     <div class="row mb-5">
                         <button
                             [disabled]="loginForm.invalid"
                             (click)="submit()"
-                            mat-flat-button color="primary">
+                            mat-flat-button
+                            color="primary"
+                        >
                             Login
                         </button>
                     </div>
@@ -35,4 +44,3 @@
         </div>
     </div>
 </section>
-

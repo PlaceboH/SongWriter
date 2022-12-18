@@ -6,34 +6,32 @@ import { Observable } from 'rxjs';
 const POST_API = 'http://localhost:8080/api/post/';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class PostService {
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-  }
+    createPost(post: Post): Observable<any> {
+        return this.http.post(POST_API + 'create', post);
+    }
 
-  createPost(post: Post): Observable<any> {
-    return this.http.post(POST_API + 'create', post);
-  }
+    getAllPosts(): Observable<any> {
+        return this.http.get(POST_API + 'all');
+    }
 
-  getAllPosts(): Observable<any> {
-    return this.http.get(POST_API + 'all');
-  }
+    getPostForCurrentUser(): Observable<any> {
+        return this.http.get(POST_API + 'user/posts');
+    }
 
-  getPostForCurrentUser(): Observable<any> {
-    return this.http.get(POST_API + 'user/posts');
-  }
+    getPostForUser(userId: number): Observable<any> {
+        return this.http.get(POST_API + userId + '/posts');
+    }
 
-  getPostForUser(userId: number): Observable<any> {
-    return this.http.get(POST_API + userId + '/posts');
-  }
+    deletePost(id: number): Observable<any> {
+        return this.http.post(POST_API + id + '/delete', null);
+    }
 
-  deletePost(id: number): Observable<any> {
-    return this.http.post(POST_API + id + '/delete', null);
-  }
-
-  likePost(id: number, username: string): Observable<any> {
-    return this.http.post(POST_API + id + '/' + username + '/like', null);
-  }
+    likePost(id: number, username: string): Observable<any> {
+        return this.http.post(POST_API + id + '/' + username + '/like', null);
+    }
 }

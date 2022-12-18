@@ -1,23 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SwRatingComponent } from './sw-rating.component';
 
 describe('SwRatingComponent', () => {
-  let component: SwRatingComponent;
-  let fixture: ComponentFixture<SwRatingComponent>;
+    let component: SwRatingComponent;
+    let fixture: ComponentFixture<SwRatingComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ SwRatingComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [SwRatingComponent],
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(SwRatingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(SwRatingComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

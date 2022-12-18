@@ -1,42 +1,42 @@
 <div class="content">
-  <form [formGroup]="form">
-    <sw-rating
-      [rating]="form.value.stars"
-      [starCount]="5"
-      (ratingUpdated)="onRatingChanged($event)"
-    ></sw-rating>
-    <mat-form-field class="w-100">
-      <mat-label>Leave a comment...</mat-label>
-      <input
-        (keyup.enter)="gradeMusicWork()"
-        matInput
-        formControlName="comment"
-        #message
-        maxlength="128"
-      />
-      <mat-hint align="end">{{ message.value.length }} / 128</mat-hint>
-    </mat-form-field>
-  </form>
+    <form [formGroup]="form">
+        <sw-rating
+            [rating]="form.value.stars"
+            [starCount]="5"
+            (ratingUpdated)="onRatingChanged($event)"
+        ></sw-rating>
+        <mat-form-field class="w-100">
+            <mat-label>Leave a comment...</mat-label>
+            <input
+                (keyup.enter)="gradeMusicWork()"
+                matInput
+                formControlName="comment"
+                #message
+                maxlength="128"
+            />
+            <mat-hint align="end">{{ message.value.length }} / 128</mat-hint>
+        </mat-form-field>
+    </form>
 
-  <div class="row">
-    <button
-      (click)="closeDialog()"
-      class="w-50"
-      mat-button
-      mat-dialog-close
-      disableRipple
-    >
-      {{ "songwriter.cancel" | translate }}
-    </button>
-    <button
-      color="primary"
-      class="w-50"
-      [disabled]="form.invalid"
-      (click)="gradeMusicWork()"
-      mat-button
-      disableRipple
-    >
-      {{ "songwriter.update" | translate }}
-    </button>
-  </div>
+    <div class="row">
+        <button
+            (click)="closeDialog()"
+            class="w-50"
+            mat-button
+            mat-dialog-close
+            disableRipple
+        >
+            {{ "songwriter.cancel" | translate }}
+        </button>
+        <button
+            color="primary"
+            class="w-50"
+            [disabled]="form.invalid"
+            (click)="gradeMusicWork()"
+            mat-button
+            disableRipple
+        >
+            {{ "songwriter.update" | translate }}
+        </button>
+    </div>
 </div>

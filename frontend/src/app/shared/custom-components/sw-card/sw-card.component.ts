@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     standalone: true,
@@ -6,10 +6,10 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
     templateUrl: './sw-card.component.html',
     styleUrls: ['./sw-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-  })
-  export class SwCardComponent {
+})
+export class SwCardComponent {
     @Input() title!: string;
     @Input() description!: string;
 
     constructor() {}
-  }
+}

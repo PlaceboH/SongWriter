@@ -11,124 +11,128 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { User } from 'src/app/shared/models/User';
 
 @Component({
-  selector: 'app-posts-page',
-  standalone: true,
-  imports: [SharedModule, MaterialModule, SearchPostPipe],
-  templateUrl: './posts-page.component.html',
-  styleUrls: ['./posts-page.component.scss']
+    selector: 'app-posts-page',
+    standalone: true,
+    imports: [SharedModule, MaterialModule, SearchPostPipe],
+    templateUrl: './posts-page.component.html',
+    styleUrls: ['./posts-page.component.scss'],
 })
 export class PostsPageComponent implements OnInit {
+    currentUser: User;
+    posts!: Post[];
+    searchValue: string;
+    isPostsLoaded: boolean = false;
+    isUserLoaded: boolean = false;
 
-  currentUser: User;
-  posts!: Post[];
-  searchValue: string;
-  isPostsLoaded: boolean = false;
-  isUserLoaded: boolean = false;
+    constructor(
+        private postService: PostService,
+        private imageService: ImageUploadService,
+        private commentService: CommentService,
+        private notificationService: NotificationService,
+        public userService: UserService
+    ) {}
 
-  constructor(
-    private postService: PostService,
-    private imageService: ImageUploadService,
-    private commentService: CommentService,
-    private notificationService: NotificationService,
-    public userService: UserService,
-  ) { }
-
-  ngOnInit(): void {
-
-    this.userService.getCurrentUser()
-      .subscribe(data => {
-          console.log("User: ", data);
-          this.currentUser = data;
-          this.isUserLoaded = true;
-    });
-
-    this.postService.getAllPosts()
-      .subscribe(data => {
-        this.posts = data;
-        console.log("Posts: ", this.posts );
-        this.getUsersToPost(this.posts);
-        this.getImagesToPosts(this.posts);
-        this.getCommentsToPost(this.posts);
-        this.isPostsLoaded = true;
-      });
-  }
-
-
-  getImagesToPosts(posts: Post[]): void {
-    posts.forEach(post => {
-      this.imageService.getImageToPost(post.id as number)
-        .subscribe(data => {
-          post.image = data ? data.imageBytes : null;
+    ngOnInit(): void {
+        this.userService.getCurrentUser().subscribe((data) => {
+            console.log('User: ', data);
+            this.currentUser = data;
+            this.isUserLoaded = true;
         });
-    });
-  }
 
-  getCommentsToPost(posts: Post[]): void {
-    posts.forEach(post => {
-      this.commentService.getCommentsToPost(post.id)
-        .subscribe(data => {
-          post.comments = data
-        })
-    });
-  }
-
-  getUsersToPost(posts: Post[]): void {
-    posts.map(post => {
-      this.userService.getUserByUsername(post.username)
-        .subscribe(user => {
-          post.user = user;
-      });    
-    });
-  }
-
-  likePost(postId: number, postIndex: number): void {
-    const post = this.posts[postIndex];
-
-    if (!post.usersLiked.includes(this.currentUser.username)) {
-      this.postService.likePost(postId, this.currentUser.username)
-        .subscribe(() => {
-          post.usersLiked.push(this.currentUser.username);
-          this.notificationService.showSuccessSnackBar('liked post!');
-        });
-    } else {
-      this.postService.likePost(postId, this.currentUser.username)
-        .subscribe(() => {
-          const index = post.usersLiked.indexOf(this.currentUser.username, 0);
-          if (index > -1) {
-            post.usersLiked.splice(index, 1);
-          }
+        this.postService.getAllPosts().subscribe((data) => {
+            this.posts = data;
+            console.log('Posts: ', this.posts);
+            this.getUsersToPost(this.posts);
+            this.getImagesToPosts(this.posts);
+            this.getCommentsToPost(this.posts);
+            this.isPostsLoaded = true;
         });
     }
-  }
 
-  postComment(event: EventTarget, postId: number, postIndex: number): void {
-    const post = this.posts[postIndex];
-    const message = (event as HTMLInputElement).value;
-
-    console.log("Message: ", message);
-    console.log("Post: ", post);
-    this.commentService.addToCommentToPost(postId, message)
-      .subscribe(data => {
-        console.log(data);
-        post.comments.push(data);
-      });
-  }
-
-  deleteComment(commentId: number, postIndex: number, commentIndex: number): void {
-    const post = this.posts[postIndex];
-
-    this.commentService.deleteComment(commentId)
-      .subscribe(() => {
-        this.notificationService.showSuccessSnackBar('Comment removed');
-        post.comments.splice(commentIndex, 1);
-      });
-  }
-
-  formatImage(img: any): any {
-    if (img == null) {
-      return null;
+    getImagesToPosts(posts: Post[]): void {
+        posts.forEach((post) => {
+            this.imageService
+                .getImageToPost(post.id as number)
+                .subscribe((data) => {
+                    post.image = data ? data.imageBytes : null;
+                });
+        });
     }
-    return 'data:image/jpeg;base64,' + img;
-  }
 
+    getCommentsToPost(posts: Post[]): void {
+        posts.forEach((post) => {
+            this.commentService.getCommentsToPost(post.id).subscribe((data) => {
+                post.comments = data;
+            });
+        });
+    }
+
+    getUsersToPost(posts: Post[]): void {
+        posts.map((post) => {
+            this.userService
+                .getUserByUsername(post.username)
+                .subscribe((user) => {
+                    post.user = user;
+                });
+        });
+    }
+
+    likePost(postId: number, postIndex: number): void {
+        const post = this.posts[postIndex];
+
+        if (!post.usersLiked.includes(this.currentUser.username)) {
+            this.postService
+                .likePost(postId, this.currentUser.username)
+                .subscribe(() => {
+                    post.usersLiked.push(this.currentUser.username);
+                    this.notificationService.showSuccessSnackBar('liked post!');
+                });
+        } else {
+            this.postService
+                .likePost(postId, this.currentUser.username)
+                .subscribe(() => {
+                    const index = post.usersLiked.indexOf(
+                        this.currentUser.username,
+                        0
+                    );
+                    if (index > -1) {
+                        post.usersLiked.splice(index, 1);
+                    }
+                });
+        }
+    }
+
+    postComment(event: EventTarget, postId: number, postIndex: number): void {
+        const post = this.posts[postIndex];
+        const message = (event as HTMLInputElement).value;
+
+        console.log('Message: ', message);
+        console.log('Post: ', post);
+        this.commentService
+            .addToCommentToPost(postId, message)
+            .subscribe((data) => {
+                console.log(data);
+                post.comments.push(data);
+            });
+    }
+
+    deleteComment(
+        commentId: number,
+        postIndex: number,
+        commentIndex: number
+    ): void {
+        const post = this.posts[postIndex];
+
+        this.commentService.deleteComment(commentId).subscribe(() => {
+            this.notificationService.showSuccessSnackBar('Comment removed');
+            post.comments.splice(commentIndex, 1);
+        });
+    }
+
+    formatImage(img: any): any {
+        if (img == null) {
+            return null;
+        }
+        return 'data:image/jpeg;base64,' + img;
+    }
 }

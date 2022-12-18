@@ -12,30 +12,29 @@ import { MaterialModule } from './app/material.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    authInterceptorProviders,
-    authErrorInterceptorProviders,
-    importProvidersFrom(
-      AppRoutingModule, 
-      BrowserAnimationsModule,
-      HttpClientModule,
-      MaterialModule,
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: httpTranslateLoader,
-          deps: [HttpClient]
-        }
-      })
-      )
-   ],
+    providers: [
+        authInterceptorProviders,
+        authErrorInterceptorProviders,
+        importProvidersFrom(
+            AppRoutingModule,
+            BrowserAnimationsModule,
+            HttpClientModule,
+            MaterialModule,
+            TranslateModule.forRoot({
+                loader: {
+                    provide: TranslateLoader,
+                    useFactory: httpTranslateLoader,
+                    deps: [HttpClient],
+                },
+            })
+        ),
+    ],
 });
 
-
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }

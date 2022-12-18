@@ -1,39 +1,39 @@
 <div>
-  <h2>{{ "home.edit.user.title" | translate }}</h2>
-  <form [formGroup]="profileEditForm">
-    <mat-form-field class="w-100" appearance="outline">
-      <mat-label>{{ "home.edit.user.firstName" | translate }}</mat-label>
-      <input matInput formControlName="firstName" />
-    </mat-form-field>
-    <mat-form-field class="w-100" appearance="outline">
-      <mat-label>{{ "home.edit.user.lastName" | translate }}</mat-label>
-      <input matInput formControlName="lastName" />
-    </mat-form-field>
-    <mat-form-field class="w-100" appearance="outline">
-      <mat-label>{{ "home.edit.user.biography" | translate }}</mat-label>
-      <input matInput formControlName="bio" />
-    </mat-form-field>
+    <h2>{{ "home.edit.user.title" | translate }}</h2>
+    <form [formGroup]="profileEditForm">
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ "home.edit.user.firstName" | translate }}</mat-label>
+            <input matInput formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ "home.edit.user.lastName" | translate }}</mat-label>
+            <input matInput formControlName="lastName" />
+        </mat-form-field>
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label>{{ "home.edit.user.biography" | translate }}</mat-label>
+            <input matInput formControlName="bio" />
+        </mat-form-field>
 
-    <div class="row">
-      <button
-        (click)="closeDialog()"
-        class="w-50"
-        mat-button
-        mat-dialog-close
-        disableRipple
-      >
-        {{ "songwriter.cancel" | translate }}
-      </button>
-      <button
-        color="primary"
-        class="w-50"
-        [disabled]="profileEditForm.invalid"
-        (click)="submit()"
-        mat-button
-        disableRipple
-      >
-        {{ "songwriter.update" | translate }}
-      </button>
-    </div>
-  </form>
+        <div class="row">
+            <button
+                (click)="closeDialog()"
+                class="w-50"
+                mat-button
+                mat-dialog-close
+                disableRipple
+            >
+                {{ "songwriter.cancel" | translate }}
+            </button>
+            <button
+                color="primary"
+                class="w-50"
+                [disabled]="profileEditForm.invalid"
+                (click)="submit()"
+                mat-button
+                disableRipple
+            >
+                {{ "songwriter.update" | translate }}
+            </button>
+        </div>
+    </form>
 </div>
