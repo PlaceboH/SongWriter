@@ -1,0 +1,46 @@
+<mat-toolbar class="navigation-line" color="primary">
+    <span routerLink="/home/profile" class="main-item">{{
+        "home.header.title" | translate
+    }}</span>
+    <span class="sub-item" routerLink="/home/users">{{
+        "home.header.users" | translate
+    }}</span>
+    <span class="sub-item" routerLink="/home/music-works">{{
+        "home.header.musicWorks" | translate
+    }}</span>
+    <span class="sub-item" routerLink="/home/posts">{{
+        "home.header.posts" | translate
+    }}</span>
+    <span class="spacer"></span>
+
+    <button
+        *ngIf="!isLoggedIn"
+        matTooltip="Login"
+        routerLink="login"
+        mat-icon-button
+        class="example-icon favorite-icon"
+    >
+        <mat-icon>{{ "songwriter.login" | translate }}</mat-icon>
+    </button>
+
+    <h3 class="main-item" routerLink="/home/profile" *ngIf="isDataLoaded">
+        {{ this.user.firstname }} {{ this.user.lastname }}
+    </h3>
+
+    <button
+        *ngIf="isLoggedIn"
+        [matMenuTriggerFor]="menu"
+        matTooltip="Profile"
+        mat-icon-button
+    >
+        <mat-icon color="accent">account_box</mat-icon>
+    </button>
+    <mat-menu id="menu-item" #menu="matMenu">
+        <button mat-menu-item routerLink="/home/profile">
+            {{ "home.header.profile" | translate }}
+        </button>
+        <button (click)="logout()" mat-menu-item>
+            {{ "songwriter.logout" | translate }}
+        </button>
+    </mat-menu>
+</mat-toolbar>

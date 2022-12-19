@@ -1,0 +1,37 @@
+@import "../../shared/global.scss";
+
+.navigation-line {
+  position: fixed;
+  max-height: 7.5vh;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+} 
+
+.main-item {
+  font-size: 2rem;
+  padding-left: 1em;
+  color: $color-grey-light-1;
+  font-family: "Lato", sans-serif;
+  text-shadow: 0 .7rem .7rem rgba($color-black, .2);
+  cursor: pointer;
+}
+
+.sub-item {
+  font-size: 1.4rem;
+  padding-left: 1em;
+  color: $color-grey-light-2;
+  text-shadow: 0 .7rem .7rem rgba($color-black, .1);
+  cursor: pointer;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+#menu-item button {
+    display: block;
+    margin: 0 auto;
+  }
+  

@@ -1,0 +1,55 @@
+<div
+    id="profile"
+    *ngIf="
+        isUserDataLoaded && followingUsers$ | async as followings;
+        else loading
+    "
+>
+    <div class="header"></div>
+    <div class="bg-text">
+        <img
+            class="profile-image"
+            [src]="
+                formatImage(userProfileImage) ||
+                'https://img.icons8.com/ios/512/no-camera.png'
+            "
+            alt="user image"
+        />
+        <div>{{ user.username }}</div>
+        <h3 class="bg-text__name">{{ user.firstname }} {{ user.lastname }}</h3>
+        <div *ngIf="!followings.includes(user.username); else unsubscribe">
+            <button mat-button color="primary" (click)="followUser(user.id)">
+                <mat-icon>person_add</mat-icon> Subscribe
+            </button>
+        </div>
+        <ng-template #unsubscribe>
+            <div>
+                <button
+                    mat-button
+                    color="accent"
+                    (click)="unfollowUser(user.id)"
+                >
+                    <mat-icon>person_outline</mat-icon> Unsubscribe
+                </button>
+            </div>
+        </ng-template>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="{{ 'home.tab.about' | translate }}">
+            <app-user-about-section [userData]="user"></app-user-about-section>
+        </mat-tab>
+        <mat-tab label="{{ 'home.tab.myWorks' | translate }}">
+            <app-user-music-works-section
+                [userData]="user"
+            ></app-user-music-works-section>
+        </mat-tab>
+        <mat-tab label="{{ 'home.tab.myPosts' | translate }}">
+            <app-user-posts-section [userData]="user"></app-user-posts-section>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>

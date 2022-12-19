@@ -8,9 +8,9 @@ import java.util.Set;
 @Data
 public class PostDTO {
     private Long id;
+    @NotEmpty
     private String title;
     private String caption;
-    @NotEmpty
     private String username;
     private Integer likes;
     private Set<String> usersLiked;

@@ -1,0 +1,39 @@
+<div *ngIf="users  && followingUsers$ | async as followings; else loading" >
+    
+    <div class="row search-user">
+        <h3 class="col-1">Users<mat-icon>search</mat-icon></h3>
+        <mat-form-field class="col-4">
+            <mat-label> Search users </mat-label>
+            <input matInput placeholder="User" [(ngModel)]="searchValue" />
+            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <div class="content">
+        <mat-card class="user-card" *ngFor="let user of users | searchUser:searchValue">
+            <img class="user-image" mat-card-image (click)="goToUserDetails(user.id)" [src]="formatImage(user.image) || 'https://img.icons8.com/ios/512/no-camera.png' "  alt="user image">
+            <div class="card-general">
+                <mat-card-title> {{ user.username }}</mat-card-title>
+                <mat-card-content>
+                    <span class="card-general__name">{{ user.firstname }}</span>
+                    <span class="card-general__name">{{ user.lastname }}</span>
+                    <div class="card-general__subscribe" *ngIf="!followings.includes(user.username); else unsubscribe">
+                        <button mat-button color="primary" (click)="followUser(user.id)" ><mat-icon>person_add</mat-icon> Subscribe</button >
+                    </div>
+                    <ng-template #unsubscribe>
+                        <div class="card-general__subscribe">
+                            <button mat-button color="accent" (click)="unfollowUser(user.id)" ><mat-icon>person_outline</mat-icon> Unsubscribe</button >
+                        </div>
+                    </ng-template>
+    
+                </mat-card-content>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #loading>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>

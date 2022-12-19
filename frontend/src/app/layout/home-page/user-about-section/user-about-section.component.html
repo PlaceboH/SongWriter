@@ -1,0 +1,25 @@
+<div *ngIf="userData && subscriptions$ | async as subs">
+    <div class="profile-box info-box general">
+        <mat-toolbar class="toolbar">
+            <div>{{ 'home.tabs.generalInformation' | translate }}</div>
+            <button *ngIf="userData.id === userService.currentUserId" class="editButton" mat-flat-button color="primary" (click)="openEditDialog()">Edit Info</button>
+        </mat-toolbar>
+        <div class="content">
+            <div class="row">
+                <div class="info-line col-8">
+                    <div class="title">{{ 'home.tabs.aboutMe' | translate }}</div>
+                    <div>{{userData.bio}}</div>
+                </div>
+                <div class="info-line col">
+                    <div class="info">Followers {{ subs[0]?.length }}</div>
+                    <button *ngIf="subs[0]?.length" class="follow-button" mat-button color="primary" (click)="openUsersPopup(subs[0])">Show followers</button>
+                </div>
+                <div class="info-line col">
+                    <div class="info">Following {{ subs[1]?.length }}</div>
+                    <button *ngIf="subs[1]?.length" class="follow-button" mat-button color="primary" (click)="openUsersPopup(subs[1])">Show following</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

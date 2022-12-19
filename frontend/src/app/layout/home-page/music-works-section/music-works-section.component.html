@@ -1,0 +1,49 @@
+<div *ngIf="isUserMusicWorksLoaded">
+
+    <div class="profile-box info-box general">
+        <mat-toolbar  class="toolbar">
+            <div >{{ 'home.tabs.myWorks.userMusicWorks' | translate }}</div>
+            <button *ngIf="userData.id === userService.currentUserId"
+                    class="editButton" mat-flat-button color="primary"
+                    (click)="openEditDialog()">
+                    Add Music work
+            </button>
+        </mat-toolbar>
+
+        <div class="content music-works-list">
+            <h2>{{musicWorks.length}} {{ 'home.tab.myWorks' | translate }} </h2>
+            <mat-card class="music-work-card" *ngFor="let musicWork of musicWorks; let i = index">
+                <div class="card-title">
+                    <mat-card-title> {{  musicWork.title }}</mat-card-title>
+                </div>
+                <img class="music-work-image" mat-card-image [src]="formatImage(musicWork.image)" alt="musicWork image">
+                <div class="card-general-info" >
+                    <mat-card-content>
+                        <p>{{ musicWork.caption }}</p>
+                    </mat-card-content>
+                    <mat-card-content>
+                        <p>{{ musicWork.description }}</p>
+                    </mat-card-content>
+                    <mat-card-actions *ngIf="userData.id === userService.currentUserId">
+                        <button color="warn" mat-button (click)="goToManagePage(musicWork.id)">
+                            <mat-icon>edit</mat-icon>
+                                {{ 'home.tabs.myWorks.edit' | translate }}
+                            </button>
+                        <button color="warn" mat-button (click)="removeMusicWork(musicWork, i)">
+                        <mat-icon color="warn">delete</mat-icon>
+                            {{ 'home.tabs.myWorks.removeMusciWork' | translate }}
+                        </button>
+                    </mat-card-actions>
+                </div>
+            
+                <div style="text-align: left">
+                    <p *ngFor="let mark of musicWork.marks;
+                                let c = index"> <span style="font-weight: 500">
+                                <span>Marks: {{mark.stars}}</span>
+                                {{ mark.username }}</span>: {{ mark.message }}
+                    </p>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -10,12 +10,13 @@ import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class MusicWorkService {
@@ -37,7 +38,6 @@ public class MusicWorkService {
         musicWork.setChords(musicWorkDTO.getChords());
         musicWork.setLyrics(musicWorkDTO.getLyrics());
         musicWork.setDescription(musicWorkDTO.getDescription());
-        musicWork.setLikes(0);
 
         LOG.info("Saving musicWork for user: {}", user.getUsername());
 
@@ -54,8 +54,9 @@ public class MusicWorkService {
         return musicWorkRepository.save(musicWork);
     }
 
-    public List<MusicWork> getAllMusicWork() {
-        return musicWorkRepository.findAllByOrderByCreationDateDesc();
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllMusicWork() {
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByOrderByCreationDateDesc());
     }
 
     public MusicWork getMusicWorkById(Long musicWorkId, Principal principal) {
@@ -65,29 +66,22 @@ public class MusicWorkService {
                 .orElseThrow(() -> new MusicWorkNotFoundException("MusicWork cannot be found username: " + user.getUsername()));
     }
 
-    public List<MusicWork> getAllMusicWorkForUser(Principal principal) {
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllMusicWorkForUser(Principal principal) {
         User user = getUserByPrincipal(principal);
 
-        return musicWorkRepository.findAllByUserOrderByCreationDateDesc(user);
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
+    }
+    @Async
+    public CompletableFuture<List<MusicWork>> getAllWorksForChosenUser(Long userId, Principal principal) {
+        User user = userRepository.findUserById(userId)
+                .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
+
+//        User subscribedUser = userRepository.findUserById(userId)
+//                .orElseThrow(() -> new MusicWorkNotFoundException("Username cannot be found"));
+        return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
 
-    public MusicWork likeMusicWork(Long musicWorkId, String username) {
-        MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
-                .orElseThrow(() -> new MusicWorkNotFoundException("MusicWork cannot be found"));
-
-        Optional<String> userLiked = musicWork.getLikedUsers()
-                .stream()
-                .filter(user -> user.equals(username)).findAny();
-        if (userLiked.isPresent()) {
-            musicWork.setLikes(musicWork.getLikes() - 1);
-            musicWork.getLikedUsers().remove(username);
-        } else {
-            musicWork.setLikes(musicWork.getLikes() + 1);
-            musicWork.getLikedUsers().add(username);
-        }
-        LOG.info("Like musicWork {} by user: {}", musicWork.getTitle(), username);
-        return musicWorkRepository.save(musicWork);
-    }
 
     public void deleteMusicWork(Long musicWorkId, Principal principal) {
         MusicWork musicWork = getMusicWorkById(musicWorkId, principal);

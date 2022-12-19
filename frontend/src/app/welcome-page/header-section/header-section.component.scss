@@ -1,0 +1,109 @@
+@import "../../shared/global.scss";
+
+.header {
+    height: 85vh;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)),
+    url(/assets/img/instrument.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 50vw 100%, 0 85vh);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 48vw 100%, 0 85vh);
+        height: 95vh;
+    }
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+            only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+            only screen and (min-width: 125em) {
+        background-image: linear-gradient(
+            to right bottom,
+            rgba($color-primary-light, 0.8),
+            rgba($color-primary-dark, 0.8)),
+        url(/assets/img/instrument.jpg);
+    }
+
+    @include respond(phone) {
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 90vh, 50vw 100%, 0 90vh);
+        clip-path: polygon(0 0, 100% 0, 100% 90vh, 50vw 100%, 0 90vh);
+    }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+
+    &__logo {
+        height: 3.5rem;
+    }
+    
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+}
+
+
+.heading-primary {
+    color: $color-white;
+    backface-visibility: hidden;
+    margin-bottom: 6rem;
+
+    &--main {
+        font-family: 'Fasthand', cursive;
+        display: block;
+        font-size: 5rem;
+        font-weight: 400;
+        letter-spacing: 1.5rem;
+        margin-bottom: 2rem;
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        
+        @include respond(phone) {
+            letter-spacing: 1rem;
+            font-family: 5rem;
+        }
+    }
+    
+    &--sub {
+        display: block;
+        font-size: 2rem;
+        font-weight: 400;
+        letter-spacing: .75rem;
+        animation: moveInRight 1s ease-out;
+
+        @include respond(phone) {
+            letter-spacing: .5rem;
+        }
+    }
+}
+
+.heading-secondary {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+    background-clip: text;
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
+    
+    @include respond(tab-port) {
+        font-size: 3rem;
+    }
+
+    @include respond(phone) {
+        font-size: 2.5rem;
+    }
+}

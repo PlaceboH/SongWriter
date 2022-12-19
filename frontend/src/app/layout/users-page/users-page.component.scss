@@ -1,0 +1,61 @@
+@import "../../shared/global.scss";
+
+
+.content {
+    padding: 2rem;
+    text-align: center;
+    min-height: 70vh;
+    background-color: $color-grey-light-2;
+}
+
+.search-user {
+    margin-top: 6em;
+    margin-bottom: 2em;
+    &__input {
+        min-height: 3em;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    }
+}
+
+.user-image {
+    border-radius: 50%;
+    width: 8vw;
+    display: block;
+    justify-content: left;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.card-general {
+    position: relative;
+    margin-left: 5em;
+    &__name {
+        padding-right: 0.5em;
+    }
+    &__subscribe {
+        padding-top: 1rem;
+    }
+}
+
+
+.user-card {
+    background-image: linear-gradient(105deg, 
+                        rgba($color-white, .9) 0%,
+                        rgba($color-white, .9) 50%) ,
+                        url(/assets/img/user_note.png);
+    background-size: 100%;
+    background-position: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, .2);
+    justify-content: left;
+    position: relative;
+    margin: 1rem;
+    padding-left: 4em;
+    padding-top: 2em;
+    width: 28vw;
+    height: 25vh;
+    display: inline-flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    text-align: left;
+}

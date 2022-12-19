@@ -1,0 +1,19 @@
+<button
+    mat-icon-button
+    [color]="'accent'"
+    *ngFor="let ratingId of ratingArr; index as i"
+    [id]="'star_' + i"
+    (click)="onClick(i + 1)"
+    [matTooltip]="ratingId + 1"
+    matTooltipPosition="above"
+>
+    <mat-icon> {{ showIcon(i) }} </mat-icon>
+</button>
+<mat-error *ngIf="starCount == null || starCount == 0">
+    {{ "sw.rating.required" | translate }}
+</mat-error>
+<p class="body-2">
+    {{ "sw.rating.youRated" | translate }}
+    <span class="body-2">{{ rating }}</span> /
+    <span class="body-2">{{ starCount }}</span>
+</p>

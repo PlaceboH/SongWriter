@@ -2,7 +2,6 @@ package com.songwriter.backend.web;
 
 import com.songwriter.backend.dto.CommentDTO;
 import com.songwriter.backend.entity.Comment;
-import com.songwriter.backend.entity.enums.EComment;
 import com.songwriter.backend.facade.CommentFacade;
 import com.songwriter.backend.payload.response.MessageResponse;
 import com.songwriter.backend.services.CommentService;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("api/comment")
@@ -37,32 +37,18 @@ public class CommentController {
 
         Comment comment = commentService.saveComment(Long.parseLong(id), commentDTO, principal);
         CommentDTO createCommentDTO = commentFacade.commentToCommentDTO(comment);
-        createCommentDTO.setEComment(commentDTO.getEComment());
 
         return new ResponseEntity<>(createCommentDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{musicWorkId}/all")
-    public ResponseEntity<List<CommentDTO>> getAllMusicWorkComments(@PathVariable("musicWorkId") String musicWorkId) {
-        List<CommentDTO> commentDTOList = commentService.getAllCommentsForMusicWork(Long.parseLong(musicWorkId))
-                .stream()
-                .map((comment -> {
-                    CommentDTO commentDTO = commentFacade.commentToCommentDTO(comment);
-                    commentDTO.setEComment(EComment.COMMENT_MUSIC_WORK);
-                    return commentDTO;
-                })).toList();
-
-        return new ResponseEntity<>(commentDTOList, HttpStatus.OK);
-    }
-
-
     @GetMapping("/{postId}/all")
-    public ResponseEntity<List<CommentDTO>> getAllPostComments(@PathVariable("postId") String postId) {
+    public ResponseEntity<List<CommentDTO>> getAllPostComments(@PathVariable("postId") String postId) throws ExecutionException, InterruptedException {
+
         List<CommentDTO> commentDTOList = commentService.getAllCommentsForPost(Long.parseLong(postId))
+                .get()
                 .stream()
                 .map((comment -> {
                     CommentDTO commentDTO = commentFacade.commentToCommentDTO(comment);
-                    commentDTO.setEComment(EComment.COMMENT_POST);
                     return commentDTO;
                 })).toList();
 

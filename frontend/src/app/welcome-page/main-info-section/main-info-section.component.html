@@ -1,0 +1,33 @@
+<section class="section-about">
+    <div class="u-center-text u-margin-bottom-big">
+        <h2 class="heading-secondary">
+            {{ 'welcome.infoSection.title' | translate }}
+        </h2>
+    </div>
+
+    <div class="row">
+        <div class="col-10">
+            <h3 class="heading-tertiary u-margin-bottom-small">{{ 'welcome.infoSection.subtitleOne' | translate }}</h3>
+            <p class="paragraph">
+                {{ 'welcome.infoSection.sectionOne' | translate }}
+            </p>
+
+            <h3 class="heading-tertiary u-margin-bottom-small">{{ 'welcome.infoSection.subtitleTwo' | translate }}</h3>
+            <p class="paragraph">
+                {{ 'welcome.infoSection.sectionTwo' | translate }}
+            </p>
+
+            <a [routerLink]="['/auth/register']" class="btn-text">{{ 'welcome.infoSection.letsStart' | translate }} &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-features">
+    <div class="row">
+        <sw-card class="col-1-of-5" title="{{ 'welcome.infoSection.features.uploadAndShareTitle' | translate }}" description="{{ 'welcome.infoSection.features.uploadAndShareDesc' | translate }}" ></sw-card>
+        <sw-card class="col-1-of-5" title="{{ 'welcome.infoSection.features.editTitle' | translate }}" description="{{ 'welcome.infoSection.features.editDesc' | translate}}" ></sw-card>
+        <sw-card class="col-1-of-5" title="{{ 'welcome.infoSection.features.subscribeTitle' | translate }}" description="{{ 'welcome.infoSection.features.subscribeDesc' | translate }}" ></sw-card>
+        <sw-card class="col-1-of-5" title="{{ 'welcome.infoSection.features.blogTitle' | translate}}" description="{{ 'welcome.infoSection.features.blogDesc' | translate }}" ></sw-card>
+        <sw-card class="col-1-of-5" title="{{ 'welcome.infoSection.features.evaluateTitle' | translate }}" description="{{ 'welcome.infoSection.features.evaluateDesc' | translate }}" ></sw-card>
+    </div>
+</section>
