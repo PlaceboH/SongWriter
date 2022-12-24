@@ -23,6 +23,7 @@ public class MusicWorkService {
     public static final Logger LOG = LoggerFactory.getLogger(MusicWorkService.class);
     public final MusicWorkRepository musicWorkRepository;
     public final UserRepository userRepository;
+
     @Autowired
     public MusicWorkService(MusicWorkRepository musicWorkRepository, UserRepository userRepository) {
         this.musicWorkRepository = musicWorkRepository;
@@ -72,6 +73,7 @@ public class MusicWorkService {
 
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
+
     @Async
     public CompletableFuture<List<MusicWork>> getAllWorksForChosenUser(Long userId, Principal principal) {
         User user = userRepository.findUserById(userId)
@@ -82,21 +84,27 @@ public class MusicWorkService {
         return CompletableFuture.completedFuture(musicWorkRepository.findAllByUserOrderByCreationDateDesc(user));
     }
 
-
-    public void deleteMusicWork(Long musicWorkId, Principal principal) {
-        MusicWork musicWork = getMusicWorkById(musicWorkId, principal);
-        musicWorkRepository.delete(musicWork);
+    public boolean deleteMusicWork(Long musicWorkId, Principal principal) {
+        if (getMusicWorkById(musicWorkId, principal) != null) {
+            MusicWork musicWork = getMusicWorkById(musicWorkId, principal);
+            musicWorkRepository.delete(musicWork);
+            return true;
+        }
+        return false;
     }
 
-    public void deleteMusicWorkAsAdmin(Long musicWorkId, Principal principal) {
+    public boolean deleteMusicWorkAsAdmin(Long musicWorkId, Principal principal) {
         User user = getUserByPrincipal(principal);
         if (user.getRoles().contains(ERole.ROLE_ADMIN)) {
             MusicWork musicWork = musicWorkRepository.findMusicWorkById(musicWorkId)
                     .orElseThrow(() -> new MusicWorkNotFoundException("MusicWork " + musicWorkId + " cannot be found"));
             musicWorkRepository.delete(musicWork);
+
             LOG.info("MusicWork {} was deleted by user: {}", musicWork.getTitle(), user.getUsername());
+            return true;
         } else {
             LOG.info("MusicWork cannot be deleted, because user: {} is not and Admin", user.getUsername());
+            return false;
         }
     }
 

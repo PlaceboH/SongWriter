@@ -26,7 +26,6 @@ public class MarkService {
     private final MusicWorkRepository musicWorkRepository;
     private final UserRepository userRepository;
 
-
     @Autowired
     public MarkService(MarkRepository markRepository, MusicWorkRepository musicWorkRepository, UserRepository userRepository) {
         this.markRepository = markRepository;
