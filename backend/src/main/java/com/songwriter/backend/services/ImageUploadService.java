@@ -6,7 +6,6 @@ import com.songwriter.backend.entity.Post;
 import com.songwriter.backend.entity.User;
 import com.songwriter.backend.exceptions.ImageNotFoundException;
 import com.songwriter.backend.repository.ImageRepository;
-import com.songwriter.backend.repository.PostRepository;
 import com.songwriter.backend.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +29,12 @@ public class ImageUploadService {
     public static final Logger LOG = LoggerFactory.getLogger(ImageUploadService.class);
     private final ImageRepository imageRepository;
     private final UserRepository userRepository;
-    private final PostRepository postRepository;
+
 
     @Autowired
-    public ImageUploadService(ImageRepository imageRepository, UserRepository userRepository, PostRepository postRepository) {
+    public ImageUploadService(ImageRepository imageRepository, UserRepository userRepository) {
         this.imageRepository = imageRepository;
         this.userRepository = userRepository;
-        this.postRepository = postRepository;
     }
 
     public ImageModel uploadImageToUser(MultipartFile file, Principal principal) throws IOException {

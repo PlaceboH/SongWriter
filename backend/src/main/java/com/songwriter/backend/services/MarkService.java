@@ -26,7 +26,6 @@ public class MarkService {
     private final MusicWorkRepository musicWorkRepository;
     private final UserRepository userRepository;
 
-
     @Autowired
     public MarkService(MarkRepository markRepository, MusicWorkRepository musicWorkRepository, UserRepository userRepository) {
         this.markRepository = markRepository;
@@ -51,7 +50,7 @@ public class MarkService {
         return markRepository.save(mark);
     }
 
-   @Async
+    @Async
     public CompletableFuture<List<Mark>> getAllMarksForMusicWork(Long musicWorkId) {
         MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
                 .orElseThrow(() -> new PostNotFoundException("Cannot found any music works"));
