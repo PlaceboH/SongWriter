@@ -13,7 +13,8 @@ public class UserFacadeTest {
 
     @Test
     void testUserFacade() {
-        log.info("Started testing method testCreateSubjectSuccessful");
+        log.info("Started testing method testUserFacade");
+
         // Arrange
         User user = new User();
         user.setId(1000L);
@@ -21,6 +22,7 @@ public class UserFacadeTest {
         user.setName("Antek");
         user.setLastname("Testerowski");
         user.setBio("some bio");
+
         // Act
         UserDTO userDTO = userFacade.userToUserDTO(user);
 
@@ -30,6 +32,7 @@ public class UserFacadeTest {
         assertEquals(user.getName(), userDTO.getFirstname());
         assertEquals(user.getLastname(), userDTO.getLastname());
         assertEquals(user.getId(), userDTO.getId());
-        log.info("Finished testing method testCreateSubjectSuccessful");
+
+        log.info("Finished testing method testUserFacade");
     }
 }

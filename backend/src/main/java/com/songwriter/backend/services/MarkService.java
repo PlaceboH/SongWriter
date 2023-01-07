@@ -50,7 +50,7 @@ public class MarkService {
         return markRepository.save(mark);
     }
 
-   @Async
+    @Async
     public CompletableFuture<List<Mark>> getAllMarksForMusicWork(Long musicWorkId) {
         MusicWork musicWork = musicWorkRepository.findById(musicWorkId)
                 .orElseThrow(() -> new PostNotFoundException("Cannot found any music works"));

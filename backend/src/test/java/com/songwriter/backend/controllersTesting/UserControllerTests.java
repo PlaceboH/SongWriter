@@ -75,12 +75,12 @@ public class UserControllerTests {
         user = createTestUser();
         UserDTO userDTO = userFacade.userToUserDTO(user);
         Optional<User> optionalUser = Optional.of(user);
-        lenient().when(principal.getName()).thenReturn("antek@gmail.com");
-        lenient().when(mockUserFacade.userToUserDTO(Mockito.any(User.class))).thenReturn(userDTO);
-        lenient().when(userRepository.save(Mockito.any(User.class))).thenReturn(Mockito.mock(User.class));
-        lenient().when(userRepository.findUserByUsername(Mockito.any(String.class))).thenReturn(optionalUser);
-        lenient().when(userRepository.findUserById(Mockito.any(Long.class))).thenReturn(optionalUser);
-        lenient().when(responseErrorValidator.mapValidationService(Mockito.any(BindingResult.class))).thenReturn(null);
+        when(principal.getName()).thenReturn("antek@gmail.com");
+        when(mockUserFacade.userToUserDTO(Mockito.any(User.class))).thenReturn(userDTO);
+        when(userRepository.save(Mockito.any(User.class))).thenReturn(Mockito.mock(User.class));
+        when(userRepository.findUserByUsername(Mockito.any(String.class))).thenReturn(optionalUser);
+        when(userRepository.findUserById(Mockito.any(Long.class))).thenReturn(optionalUser);
+        when(responseErrorValidator.mapValidationService(Mockito.any(BindingResult.class))).thenReturn(null);
     }
 
     @Test
